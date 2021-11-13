@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: nhatpham0709
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        container_name: php
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+
+
+    mysql:
+        image: mysql:latest
+        command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        container_name: mysql
+        ports:
+            - "${DB_PORT-3306}:3306"
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - lms_db:/var/lib/mysql
+
+
+    nginx:
+        image: nginx:alpine
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+            - "${NGINX_PORT-8000}:80"
+        volumes:
+            - ./:/var/www
+            - ./:/etc/nginx/conf.d/
+
+volumes:
+    lms_db:
+        driver: local
+
