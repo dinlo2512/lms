@@ -10,12 +10,24 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="20xpVzKB6IJvvLKG43p1QvlUjuV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -31,6 +43,10 @@
       <option name="presentableId" value="Default" />
       <updated>1636996121098</updated>
       <workItem from="1636996122412" duration="14000" />
+      <workItem from="1636997000191" duration="1106000" />
+      <workItem from="1636998406581" duration="2091000" />
+      <workItem from="1637000563336" duration="234000" />
+      <workItem from="1637000934920" duration="1717000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,5 @@
 /*CSS*/
+
 *{
     margin: 0;
     padding: 0;
@@ -23,12 +24,13 @@ body{
     align-items: center;
     justify-content: space-between;
     position: fixed;
-    top: 0; left: 0;
+    top: -100%; left: 0;
     padding: 10px 40px;
     background: #fff;
     box-shadow: 0 .1rem .3rem #999999;
     z-index: 1100;
 }
+
 #header .logo img{
     height: 35px;
 }
@@ -43,11 +45,11 @@ body{
     margin-right: 20px;
 }
 #header nav ul li a{
+    text-decoration:none;
     color: #333333;
     font-size: 20px;
 }
 #header nav ul li a:hover{
-    text-decoration: none;
     color: #00A4EF;
 }
 .fa-bars{
@@ -56,7 +58,6 @@ body{
     cursor: pointer;
     display: none;
 }
-
 /*home section*/
 #home{
     min-height: 100vh;
@@ -70,7 +71,8 @@ body{
 
 }
 #home  .content{
-    position: relative;
+    position: absolute;
+    padding-left: 50px;
 
 }
 #home   .content h1{
@@ -79,12 +81,12 @@ body{
 
 }
 #home .content h2{
-    font-size: 60px;
+    font-size: 50px;
     color: #00A4EF;
 
 }
-#home .content h1{
-    font-size: 40px;
+#home .content h3{
+    font-size: 30px;
     color: #333333;
     margin: 10px 0;
 }
@@ -105,10 +107,10 @@ body{
     background:#333333;
 }
 #home .icons{
-    position: absolute;
-    left: 20px;
-    bottom: -65%;
+    position: relative;
+    left: 20px;bottom: -65%;
     width: 100%;
+    padding-top: 15px;
 }
 #home .icons a{
     height: 40px;
@@ -119,14 +121,19 @@ body{
     border-radius: 50px;
     font-size: 17px;
     color: #fff;
-    margin-right: 15px;
+    margin-right: 10px;
+    text-decoration: none;
+
 }
+
 #home .icons a:hover{
     transition: .4s;
-    text-decoration: none;
+
     background: #333;
 
 }
+
+
 /*course*/
 #course{
     display: grid;
@@ -143,7 +150,6 @@ body{
     color: #00A4EF;
 
 }
-
 .heading::after{
     content: '';
     position: absolute;
@@ -155,6 +161,8 @@ body{
     border-radius: 50px;
     background: #333333;
 }
+
+
 
 #course .box-container{
     display: flex;
@@ -324,7 +332,7 @@ body{
 #contact{
     display: grid;
     place-items: center;
-    background:linear-gradient(#FC9368,#FC9368), url("../images/contact-bg.jpg") no-repeat;
+    background:url("../images/contact-bg.jpg") no-repeat, linear-gradient(#FC9368,#FC9368);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -427,7 +435,7 @@ body{
     padding: 20px 0;
     font-size: 30px;
 }
-#footer .icons img{
+#footer .icon img{
     width: 50px;
     height: 50px;
     background-size: cover;
