@@ -1,0 +1,217 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins-Regular', san-serif;
+
+}
+
+body{
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0; left: 0;
+    height: 100%;
+    width: 78px;
+    background:#2091E9;
+    padding: 6px 14px;
+    transition: all .5s ease;
+}
+.sidebar.active{
+    width: 240px;
+}
+
+.sidebar .logo-content .logo{
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s ease;
+}
+.sidebar.active .logo-content .logo{
+    opacity: 1;
+    pointer-events: none;
+}
+
+.sidebar #btn{
+    position: absolute;
+    color: #fff;
+    left: 50%;
+    top: 6px;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translatex(-50%);
+}
+.sidebar.active #btn{
+    left: 90%;
+}
+
+.sidebar .links_name{
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s ease;
+}
+.sidebar.active .links_name{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.logo img {
+    width: 80px;
+}
+
+.sidebar ul{
+    margin-top: 20px;
+    padding-left: 0;
+}
+.sidebar ul li{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+
+}
+.sidebar ul li a{
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    transition: all .4s ease;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover{
+    color: #2091E9;
+    background:#fff;
+}
+
+.sidebar ul li a i{
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.sidebar .profile-content{
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .profile-content .profile{
+    position: relative;
+    padding: 10px 6px;
+    height: 60px;
+    background: #2091A8;
+}
+
+.sidebar ul li .tooltip{
+    position: absolute;
+    left: 122px; top: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    line-height: 35px;
+    text-align: center;
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+}
+.sidebar.active ul li .tooltip{
+    display: none;
+}
+.sidebar ul li:hover .tooltip{
+    transition: all .5s ease;
+    top: 50%;
+    opacity: 1;
+}
+
+.profile-content .profile .profile-detail{
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+
+}
+.sidebar.active .profile .profile-detail{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.profile-detail img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.profile .profile-detail .name-job{
+    margin-left: 10px;
+}
+.profile .profile-detail .name{
+    font-size: 15px;
+    font-weight: 400;
+}
+.profile .profile-detail .job{
+    font-size: 12px;
+}
+
+.profile #log-out{
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    min-width: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all .5s ease;
+
+}
+.sidebar.active .profile #log-out{
+    left: 88%;
+}
+
+.home-content{
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all .5s ease;
+}
+.sidebar.active ~ .home-content{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+
+
+
+
+
+/*fonts*/
+@font-face {
+    font-family: 'Poppins-Regular';
+    src: url("../fonts/Poppins-Regular.ttf");
+}
