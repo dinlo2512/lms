@@ -48,18 +48,6 @@
                 <span class="tooltip">Setting</span>
             </li>
         </ul>
-        <div class="profile-content">
-            <div class="profile">
-                <div class="profile-detail">
-                    <img src="{{URL('front-end/images/user.jfif')}}" alt="">
-                    <div class="name-job">
-                        <div class="name">NAME</div>
-                        <div class="job">Student</div>
-                    </div>
-                </div>
-                <i class="fas fa-sign-out-alt" id="log-out"></i>
-            </div>
-        </div>
     </div>
 </div>
 @yield('content')
@@ -71,6 +59,13 @@
 
         $('.fa-bars').click(function () {
             $('.sidebar').toggleClass('active');
+        })
+
+    });
+    $(document).ready(function () {
+
+        $('.fa-caret-down').click(function () {
+            $('.drop').toggleClass('active');
         })
 
     });

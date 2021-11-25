@@ -1,8 +1,27 @@
-@extends('home')
+@extends('my')
 @section('content')
     <div class="home-content">
         <div class="header">
-            <div class="header-top"></div>
+            <div class="header-top">
+                <div class="profile-content">
+                    <div class="profile">
+                        <div class="profile-detail">
+                            <img src="{{URL('front-end/images/user.jfif')}}" alt="">
+                            <div class="name-job">
+                                <div class="name">NAME NAME</div>
+                                <div class="job">Student</div>
+                            </div>
+                        </div>
+                        <div class="drop">
+                            <i class="fas fa-caret-down" id="dropdown"></i>
+                            <div class="drop-menu">
+                                <a href=""><i class="fas fa-sign-out-alt"></i>
+                                    <div class="name">LOG OUT</div></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="heading">
                 <h3>Chào mừng quay trở lại!</h3>
             </div>

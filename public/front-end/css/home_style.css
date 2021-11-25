@@ -99,7 +99,7 @@ body {
     display: flex;
     align-items: center;
     border-radius: 12px;
-    transition: all .4s ease;
+    transition: all .1s ease;
     white-space: nowrap;
 }
 
@@ -116,20 +116,7 @@ body {
     text-align: center;
 }
 
-.sidebar .profile-content {
-    position: absolute;
-    color: #fff;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
 
-.sidebar .profile-content .profile {
-    position: relative;
-    padding: 10px 6px;
-    height: 60px;
-    background: #2091A8;
-}
 
 .sidebar ul li .tooltip {
     position: absolute;
@@ -148,12 +135,24 @@ body {
     background: #FFF;
 }
 
-.sidebar.active ul li:hover .tooltip {
-    transition: all .5s ease;
+.sidebar.active ul li:hover .tooltip{
+    transition: all 150ms ease  ;
     top: 50%;
     opacity: 1;
 
 
+}
+
+.profile-content {
+    color: #fff;
+    width: 100%;
+}
+
+.profile-content .profile {
+    display: flex;
+    padding: 5px 30px;
+    height: 60px;
+    float: right;
 }
 
 .profile-content .profile .profile-detail {
@@ -165,16 +164,16 @@ body {
 
 }
 
-.sidebar.active .profile .profile-detail {
-    opacity: 0;
-    pointer-events: none;
-}
+/*.sidebar.active .profile .profile-detail {*/
+/*    opacity: 0;*/
+/*    pointer-events: none;*/
+/*}*/
 
 .profile-detail img {
     height: 45px;
     width: 45px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 25px;
 }
 
 .profile .profile-detail .name-job {
@@ -190,11 +189,9 @@ body {
     font-size: 12px;
 }
 
-.profile #log-out {
-    position: absolute;
+#dropdown {
     left: 88%;
     bottom: 5px;
-    transform: translateX(-50%);
     min-width: 50px;
     line-height: 50px;
     font-size: 20px;
@@ -204,9 +201,44 @@ body {
 
 }
 
-.sidebar.active .profile #log-out {
-    left: 50%;
+.drop{
+    position: relative;
 }
+
+.drop-menu{
+    position: absolute;
+    color: #1e2125;
+    left: -100px;
+    top: calc(100% + 5px);
+    background: #DDDFE2;
+    width: 140px;
+    padding: 5px 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 150ms ease-in-out;
+    pointer-events: none;
+
+}
+
+.drop.active .drop-menu{
+    opacity: 1;
+    transform: translateY(0px);
+    pointer-events: auto;
+}
+
+.drop-menu .name{
+    display: inline-block;
+}
+
+.drop-menu a{
+    text-decoration: none;
+    color: #1e2125;
+}
+/*.sidebar.active .profile #log-out {*/
+/*    left: 50%;*/
+/*}*/
 
 .sidebar.active ~ .home-content {
     width: calc(100% - 78px);
@@ -220,31 +252,32 @@ body {
     width: calc(100% - 240px);
     left: 240px;
     transition: all .5s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
 
 }
-/*.container{*/
-/*    width: calc(100% - 240px);*/
-/*    left: 240px;*/
-/*}*/
-
-.headerr {
+.container{
+    width: calc(100% - 240px);
+    left: 240px;
+}
+.header-top{
+    display: flex;
+    background: #2091A8;
+    align-items: baseline;
+}
+.heading {
     border: 1px solid #999999;
     margin: 6px;
-}
-
-.header-top {
-    height: 35px;
 }
 
 .heading h3 {
     margin: auto;
     padding: 10px 20px;
-    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.92);
     text-transform: uppercase;
     font-size: 30px;
 }
 
-.header-bottom p {
+.heading p {
     margin-left: 20px;
 }
 
@@ -253,7 +286,6 @@ body {
     display: grid;
     place-items: center;
     min-height: 100vh;
-    /*width: 100vw;*/
 
 }
 
@@ -310,6 +342,8 @@ body {
     transform: scale(1.03);
 }
 
+
+
 /*course*/
 .content {
     border: 1px solid #999999;
@@ -347,6 +381,7 @@ body {
 
 }
 #footer h3{
+    text-transform: uppercase;
     color: #fff;
     padding: 20px 0;
     font-size: 30px;
@@ -357,10 +392,11 @@ body {
     background-size: cover;
     margin-left: 5px;
 }
-.logo-footer img {
-    width: 170px;
-    height: 90px;
-    padding-left: 30px;
+
+.logo-footer img{
+    margin: 20px 10px;
+    width: 160px;
+    padding: 10px;
 }
 
 @media (max-width: 500px) {
