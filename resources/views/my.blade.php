@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{URL('front-end/css/normalize.css')}}">
     <link rel="stylesheet" href="{{URL('front-end/css/fontawesome-5.web/css/all.min.css')}}">
     <link rel="stylesheet" href="{{URL('front-end/css/home_style.css')}}">
+    <link rel="stylesheet" href="{{URL('front-end/css/user_profile.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -24,28 +25,28 @@
                     <i class="fas fa-th-large"></i>
                     <span class="links_name">Dashboard</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+{{--                <span class="tooltip">Dashboard</span>--}}
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-user"></i>
                     <span class="links_name">User</span>
                 </a>
-                <span class="tooltip">User</span>
+{{--                <span class="tooltip">User</span>--}}
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-home"></i>
                     <span class="links_name">Site Home</span>
                 </a>
-                <span class="tooltip">Site Home</span>
+{{--                <span class="tooltip">Site Home</span>--}}
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-cog"></i>
                     <span class="links_name">Setting</span>
                 </a>
-                <span class="tooltip">Setting</span>
+{{--                <span class="tooltip">Setting</span>--}}
             </li>
         </ul>
     </div>

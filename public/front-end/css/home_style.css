@@ -118,30 +118,30 @@ body {
 
 
 
-.sidebar ul li .tooltip {
-    position: absolute;
-    left: 122px;
-    top: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-    height: 35px;
-    width: 122px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    line-height: 35px;
-    text-align: center;
-    transition: 0s;
-    pointer-events: none;
-    opacity: 0;
-    background: #FFF;
-}
+/*.sidebar ul li .tooltip {*/
+/*    position: absolute;*/
+/*    left: 122px;*/
+/*    top: 0;*/
+/*    transform: translate(-50%, -50%);*/
+/*    border-radius: 6px;*/
+/*    height: 35px;*/
+/*    width: 122px;*/
+/*    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);*/
+/*    line-height: 35px;*/
+/*    text-align: center;*/
+/*    transition: 0s;*/
+/*    pointer-events: none;*/
+/*    opacity: 0;*/
+/*    background: #FFF;*/
+/*}*/
 
-.sidebar.active ul li:hover .tooltip{
-    transition: all 150ms ease  ;
-    top: 50%;
-    opacity: 1;
+/*.sidebar.active ul li:hover .tooltip{*/
+/*    transition: all 150ms ease  ;*/
+/*    top: 50%;*/
+/*    opacity: 1;*/
 
 
-}
+/*}*/
 
 .profile-content {
     color: #fff;
@@ -357,8 +357,13 @@ body {
 .main p {
     padding: 20px 10px;
     font-size: 20px;
+    border-bottom: 1px solid;
 }
 
+.main .lesson{
+    padding: 0px 15px;
+    padding-top: 10px;
+}
 
 /*footer*/
 #footer{
@@ -398,6 +403,11 @@ body {
     width: 160px;
     padding: 10px;
 }
+
+
+
+
+
 
 @media (max-width: 500px) {
 

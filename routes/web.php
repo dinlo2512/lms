@@ -22,4 +22,6 @@ Route::get('/my',function (){
 Route::get('/course',function (){
     return view('course');
 });
-
+Route::get('/user-profile',function (){
+    return view('user');
+});
