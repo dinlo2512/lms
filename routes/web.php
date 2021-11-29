@@ -25,3 +25,7 @@ Route::get('/course',function (){
 Route::get('/user-profile',function (){
     return view('user');
 });
+Route::get('/login',function (){
+    return view('login');
+});
+
