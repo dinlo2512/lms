@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/my',function (){
-    return view('content');
+    return view('dashboard');
 });
 Route::get('/course',function (){
     return view('course');
@@ -28,4 +28,11 @@ Route::get('/user-profile',function (){
 Route::get('/login',function (){
     return view('login');
 });
+Route::get('/setting-user-profile',function (){
+    return view('setting');
+});
+Route::get('/password-user-profile',function (){
+    return view('password');
+});
+
 

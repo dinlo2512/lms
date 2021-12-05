@@ -265,19 +265,19 @@ body {
     background: #2091A8;
     align-items: baseline;
 }
-.heading {
+.content-top {
     border: 1px solid #999999;
     margin: 6px;
 }
 
-.heading h3 {
+.content-top h3 {
     margin: auto;
     padding: 10px 20px;
     text-transform: uppercase;
     font-size: 30px;
 }
 
-.heading p {
+.content-top p {
     margin-left: 20px;
 }
 
