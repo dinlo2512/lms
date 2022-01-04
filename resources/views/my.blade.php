@@ -68,9 +68,14 @@
                     <div class="drop">
                         <i class="fas fa-caret-down" id="dropdown"></i>
                         <div class="drop-menu">
-                            <a href=""><i class="fas fa-sign-out-alt"></i>
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
                                 <div class="name">LOG OUT</div>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
