@@ -1,0 +1,81 @@
+.card-body{
+    background: #EFEFEF;
+}
+.course{
+    padding-top: 20px;
+    border-bottom: 2px solid #DFDFDF;
+}
+
+.wapper{
+    height: 150px;
+    width: 150px;
+    position: relative;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    left: 41%;
+    background-image: url("../images/user.jfif");
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+.img-file{
+    position: absolute;
+    bottom: 0;
+    outline: none;
+    color: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: 0.5s;
+    left: 2px;
+    background: rgba(0,0,0,0.5);
+    padding-left: 43px;
+    opacity: 0;
+}
+.img-file:hover{
+    opacity: 1;
+}
+.img-file::-webkit-file-upload-button{
+    visibility: hidden;
+}
+.img-file::before{
+    font-family: "Font Awesome 5 Pro";
+    content: "\f030";
+    font-size: 50px;
+    color: #FFF;
+    display: inline-block;
+    -webkit-user-select: none;
+
+}
+.row .grade{
+    padding: 10px 0;
+    padding-left: 50px;
+}
+.pointer:hover {
+    cursor: no-drop;
+}
+
+input[type='text'] {
+    width: 320px;
+}
+input[type='password'] {
+    width: 320px;
+}
+
+input[type='submit'] {
+    background: #2091E9;
+    width: 72px;
+    padding: 8px;
+    border-radius: 10px;
+    margin-left: 18px;
+}
+.setting-menu a{
+    text-decoration: none;
+    color: #212529;
+    margin:10px 20px ;
+}
+.setting-menu h5{
+    display: inline-block;
+    padding-left: 10px;
+}
+
+
