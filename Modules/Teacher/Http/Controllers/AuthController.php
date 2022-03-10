@@ -20,7 +20,7 @@ class AuthController extends Controller
 
         if (!Auth::guard('teacher')->attempt($credentials)) {
             // Authentication passed...
-            return Redirect::back()->withErrors(['auth' => 'Invalid username or password']);
+            return Redirect::back()->withErrors(['auth' => 'Invalid username or password *']);
 
         }
         return redirect()->intended(route('teacher.home'));

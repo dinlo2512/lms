@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class TeacherController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $title = "Home";
-        return view('teacher::index', compact('title'));
+        return view('teacher::index');
     }
 
     /**
@@ -42,10 +41,9 @@ class TeacherController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id=null)
+    public function show($id)
     {
-        $title = "Teacher";
-        return view('teacher::setting.index', compact('title'));
+        return view('teacher::show');
     }
 
     /**
@@ -78,6 +76,4 @@ class TeacherController extends Controller
     {
         //
     }
-
-
 }

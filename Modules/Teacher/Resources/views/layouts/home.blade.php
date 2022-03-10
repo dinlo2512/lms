@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <link rel="stylesheet" href="{{URL('front-end/css/normalize.css')}}">
-    {{--    <link rel="stylesheet" href="{{URL('front-end/css/fontawesome-5.web/css/all.min.css')}}">--}}
+    <title>{{$title}}</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{URL('front-end/css/home_style.css')}}">
     <link rel="stylesheet" href="{{URL('front-end/css/user_profile.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -21,36 +29,7 @@
             <img src="{{URL('/front-end/images/logo.png')}}" alt="">
         </div>
         <i class="fas fa-bars" id="btn"></i>
-        <ul class="nav-list">
-            <li>
-                <a href="{{route('my.dash')}}">
-                    <i class="fas fa-th-large"></i>
-                    <span class="links_name">Dashboard</span>
-                </a>
-                {{--                <span class="tooltip">Dashboard</span>--}}
-            </li>
-            <li>
-                <a href="{{URL::to('/user-profile')}}">
-                    <i class="fas fa-user"></i>
-                    <span class="links_name">User</span>
-                </a>
-                {{--                <span class="tooltip">User</span>--}}
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-home"></i>
-                    <span class="links_name">Site Home</span>
-                </a>
-                {{--                <span class="tooltip">Site Home</span>--}}
-            </li>
-            <li>
-                <a href="{{URL::to('/setting-user-profile')}}">
-                    <i class="fas fa-cog"></i>
-                    <span class="links_name">Setting</span>
-                </a>
-                {{--                <span class="tooltip">Setting</span>--}}
-            </li>
-        </ul>
+        @yield('nav-list')
     </div>
 </div>
 <div class="home-content">
@@ -61,8 +40,8 @@
                     <div class="profile-detail">
                         <img src="{{URL('front-end/images/user.jfif')}}" alt="">
                         <div class="name-job">
-                            <div class="name">NAME NAME</div>
-                            <div class="job">Student</div>
+                            <div class="name">{{ Auth::guard('teacher')->user()->name }}</div>
+                            <div class="job">Teacher</div>
                         </div>
                     </div>
                     <div class="drop">
@@ -70,7 +49,8 @@
                         <div class="drop-menu">
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
+                                                     document.getElementById('logout-form').submit();"><i
+                                    class="fas fa-sign-out-alt"></i>
                                 <div class="name">LOG OUT</div>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -83,6 +63,7 @@
         </div>
     </div>
     @yield('content')
+
     <div id="footer">
         <div class="footer-main">
             <div class="container">
@@ -129,5 +110,7 @@
 
     });
 </script>
+</div>
+
 </body>
 </html>

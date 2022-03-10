@@ -2,20 +2,29 @@
 
 namespace Modules\Teacher\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class TeacherController extends Controller
+class CourseController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        $title = "Home";
-        return view('teacher::index', compact('title'));
+        $title = "Courses";
+        $classes = Course::query()->where('teacher_id', Auth::guard('teacher')->user()->id)
+            ->paginate(5);
+
+
+        return view('teacher::courses.index', compact('classes','title'));
     }
 
     /**
@@ -42,10 +51,14 @@ class TeacherController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id=null)
+    public function show($id)
     {
-        $title = "Teacher";
-        return view('teacher::setting.index', compact('title'));
+        $title = "Course";
+        $students = User::whereHas('courses', function (Builder $query) use ($id) {
+            $query->where('course_id', $id);
+        })->paginate(10);
+      $course = Course::findOrFail($id);
+        return view('teacher::courses.show',compact('students', 'title','course'));
     }
 
     /**
@@ -78,6 +91,4 @@ class TeacherController extends Controller
     {
         //
     }
-
-
 }

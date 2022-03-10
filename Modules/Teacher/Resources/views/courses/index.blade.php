@@ -3,21 +3,20 @@
 @section('nav-list')
     <ul class="nav-list">
         <li>
-            <a href="">
+            <a href="{{route('teacher.courses.index')}}">
                 <i class="fas fa-th-large"></i>
                 <span class="links_name">Dashboard</span>
             </a>
 
         </li>
         <li>
-            <a href="#">
-                <i class="fas fa-user"></i>
-                <span class="links_name">Student</span>
+            <a href="{{route('teacher.showTeacher')}}">
+                <i class="fas fa-cog"></i>
+                <span class="links_name">Setting</span>
             </a>
         </li>
+    </ul>
 @endsection
-
-
 @section('content')
     <div class="content-top">
         <h3>Welcome </h3>
@@ -30,6 +29,7 @@
             <p>
                 This view is loaded from module: {!! config('teacher.name') !!}
             </p>
+            @include('teacher::components.courses-list')
         </div>
     </div>
     <style>

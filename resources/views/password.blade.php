@@ -15,6 +15,7 @@
                         <hr>
                     </div>
                     <div class="col-md-8 mt-1">
+                        <form action="" method="post">
                         <div class="card mb-3 ">
                             <h1 class="m-3 pt-3">Đổi mật khẩu</h1>
                             <div class="card-body">
@@ -46,7 +47,8 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" value="Lưu">
+                        <input type="submit" value="Lưu" id="submit-pass">
+                        </form>
                     </div>
                 </div>
             </div>

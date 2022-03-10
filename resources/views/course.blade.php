@@ -7,16 +7,16 @@
     <div class="content">
         <div class="main">
             <div class="lesson">
-                <p>chương 1:</p>
+                <p class="p">chương 1:</p>
             </div>
             <div class="lesson">
-                <p>chương 2:</p>
+                <p class="p">chương 2:</p>
             </div>
             <div class="lesson">
-                <p>chương 3:</p>
+                <p class="p">chương 3:</p>
             </div>
             <div class="lesson">
-                <p>chương 4:</p>
+                <p class="p">chương 4:</p>
             </div>
         </div>
     </div>

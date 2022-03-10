@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail    ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -66,6 +66,7 @@
                         </div>
                     </form>
                 </div>
+                <button class="btn btn-danger"><a href="{{URL::to('/teacher')}}" style="text-decoration: none; color: white">Login as Teacher</a></button>
             </div>
         </div>
     </div>
