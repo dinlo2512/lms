@@ -7,14 +7,12 @@
                 <i class="fas fa-th-large"></i>
                 <span class="links_name">Dashboard</span>
             </a>
-
         </li>
         <li>
             <a href="{{ route('teacher.courses.show', $course->id) }}">
                 <i class="fas fa-user"></i>
                 <span class="links_name">Student</span>
             </a>
-
         </li>
         <li>
             <a href="{{ route('teacher.exercises.index', $course->id) }}">

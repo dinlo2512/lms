@@ -3,47 +3,45 @@
 namespace Modules\Teacher\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Exercise;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class GradesController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index($courseId,$exerciseId)
     {
-        $title = "Courses";
-        $classes = Course::query()->where('teacher_id', Auth::guard('teacher')->user()->id)
-            ->paginate(5);
+        $course = Course::findOrFail($courseId);
+        $title = "Exercises Grades";
+        $exercises = Exercise::query()->where('course_id', $course->id)->paginate('10');
 
-
-        return view('teacher::courses.index', compact('classes','title'));
+        return view('teacher::grades.index', compact('title', 'course','exercises'));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create()
+    public function create($id)
     {
-        return view('teacher::create');
+
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param CreateExerciseRequest $request
      */
-    public function store(Request $request)
+    public function store(CreateExerciseRequest $request, int $id)
     {
-        //
+
     }
 
     /**
@@ -51,14 +49,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($courseid)
+    public function show($id)
     {
-        $title = "Course";
-        $students = User::whereHas('courses', function (Builder $query) use ($courseid) {
-            $query->where('course_id', $courseid);
-        })->paginate(10);
-      $course = Course::findOrFail($courseid);
-        return view('teacher::courses.show',compact('students', 'title','course'));
+        return view('teacher::show');
     }
 
     /**
@@ -66,7 +59,7 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($courseid)
+    public function edit($id)
     {
         return view('teacher::edit');
     }
@@ -77,7 +70,7 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $courseid)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,8 +80,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($courseid)
+    public function destroy($id)
     {
         //
     }
 }
+

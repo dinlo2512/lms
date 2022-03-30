@@ -40,25 +40,21 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1> Tất cả bài học của lớp</h1>
-            <a href="{{route('teacher.exercises.create', $course->id)}}" class="btn btn-primary">Create</a>
+            <h1>Tên bài học</h1>
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">
                         <th>Mã</th>
                         <th>Tên</th>
-                        <th>Deadline</th>
-                        <th></th>
+                        <th>Điểm</th>
                     </tr>
-                    @foreach($exercises as $exercise)
-                        <tr>
-                            <td>{{ $exercise->id }}</td>
-                            <td>{{ $exercise->content}}</td>
-                            <td>{{ $exercise->deadline }}</td>
-                            <td><a href="{{ route('teacher.grades.index',[$course->id,$exercise->id]) }}" class="btn btn-info">Chi tiết</a></td>
-                        </tr>
+                    @foreach($exercises as $val)
+                    <tr>
+                        <td>{{ $val->id }}</td>
+                        <td>{{ $val->name }}</td>
+                        <td>{{ $val->grade }}</td>
+                    </tr>
                     @endforeach
-
                 </table>
             </div>
         </div>
@@ -68,3 +64,4 @@
 
 
 @endsection
+
