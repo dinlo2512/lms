@@ -15,13 +15,14 @@ class Teacher extends Authenticatable
     /**
      * @var string[]
      */
-    protected $fillable =[
-      'name',
-      'username',
-      'address',
-      'email',
-      'phone_number',
-      'password'
+    protected $fillable = [
+        'name',
+        'date_of_birth',
+        'username',
+        'address',
+        'email',
+        'phone_number',
+        'password'
     ];
 
     /**
@@ -34,7 +35,7 @@ class Teacher extends Authenticatable
     /**
      * @return HasMany
      */
-    public function notification():HasMany
+    public function notification(): HasMany
     {
         return $this->hasMany(Notification::class);
     }
@@ -42,7 +43,7 @@ class Teacher extends Authenticatable
     /**
      * @return HasMany
      */
-    public function course():HasMany
+    public function course(): HasMany
     {
         return $this->hasMany(Course::class);
     }

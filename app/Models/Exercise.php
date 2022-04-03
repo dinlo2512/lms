@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Exercise extends Model
 {
@@ -16,7 +17,6 @@ class Exercise extends Model
       'course_id',
       'lesson_id',
       'deadline',
-      'grade'
     ];
 
     /**
@@ -36,10 +36,12 @@ class Exercise extends Model
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function users():BelongsToMany
+    public function grades():hasMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasMany(Grades::class);
     }
+
+
 }
