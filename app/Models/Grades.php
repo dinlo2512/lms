@@ -19,7 +19,7 @@ class Grades extends Model
     /**
      * @return BelongsTo
      */
-    public function exercise():BelongsTo
+    public function exercise(): BelongsTo
     {
         return $this->belongsTo(Exercise::class);
     }
@@ -27,9 +27,9 @@ class Grades extends Model
     /**
      * @return BelongsTo
      */
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
 }
+

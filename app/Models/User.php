@@ -47,16 +47,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function grades():hasMany
-    {
-        return $this->hasMany(Grades::class);
-    }
-
     /**
      * @return BelongsToMany
      */
     public function courses():BelongsToMany
     {
         return $this->belongsToMany(Course::class);
+    }
+
+    public function grades():hasMany
+    {
+        return $this->hasMany(Grades::class);
     }
 }

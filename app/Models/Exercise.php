@@ -17,7 +17,6 @@ class Exercise extends Model
       'course_id',
       'lesson_id',
       'deadline',
-      'grade'
     ];
 
     /**
@@ -43,4 +42,6 @@ class Exercise extends Model
     {
         return $this->hasMany(Grades::class);
     }
+
+
 }
