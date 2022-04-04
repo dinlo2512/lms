@@ -35,28 +35,28 @@
 @section('content')
 
     <div class="content-top">
-        <h3>Exericses</h3>
+        <h3>Lessons</h3>
         <p>Dashboard/{{$course->name}}</p>
     </div>
     <div class="content">
         <div class="main">
             <h1> Tất cả bài học của lớp</h1>
-            <a href="{{route('teacher.exercises.create', $course->id)}}" class="btn btn-primary">Create</a>
+{{--            <a href="{{route('teacher.exercises.create', $course->id)}}" class="btn btn-primary">Create</a>--}}
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">
-                        <th>Mã</th>
+                        <th>STT</th>
                         <th>Tên</th>
-                        <th>Deadline</th>
+                        <th>Thông tin</th>
                         <th></th>
                     </tr>
-                    @foreach($exercises as $exercise)
-                        <tr>
-                            <td>{{ $exercise->id }}</td>
-                            <td>{{ $exercise->content}}</td>
-                            <td>{{ $exercise->deadline }}</td>
-                            <td><a href="{{ route('teacher.grades.index',[$course->id,$exercise->id]) }}" class="btn btn-info">Chi tiết</a></td>
-                        </tr>
+                    @foreach($lessons as $lesson)
+                    <tr>
+                        <td>{{ $lesson->id }}</td>
+                        <td>{{ $lesson->content }}</td>
+                        <td>{{ $lesson->description }}</td>
+                        <td><a href="{{ route('teacher.lessons.show', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a></td>
+                    </tr>
                     @endforeach
 
                 </table>

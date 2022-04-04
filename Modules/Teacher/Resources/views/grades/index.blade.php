@@ -17,7 +17,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.exercises.index', $course->id)}}">
+            <a href="{{route('teacher.lessons.index', $course->id)}}">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -40,19 +40,21 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1>Tên bài học</h1>
+            <h1>Bài tập {{ $exercises->content }}</h1>
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">
-                        <th>Mã</th>
+                        <th>STT</th>
+                        <th>Mã học viên</th>
                         <th>Tên</th>
                         <th>Điểm</th>
                     </tr>
-                    @foreach($exercises as $val)
+                    @foreach($grades as $val)
                     <tr>
                         <td>{{ $val->id }}</td>
+                        <td>MHV{{ $val->user_id }}</td>
                         <td>{{ $val->name }}</td>
-                        <td>{{ $val->grade }}</td>
+                        <td>{{ $val->grades }}</td>
                     </tr>
                     @endforeach
                 </table>

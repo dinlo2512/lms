@@ -17,7 +17,7 @@
 
     </li>
     <li>
-        <a href="{{route('teacher.exercises.index', $course->id)}}">
+        <a href="{{route('teacher.lessons.index', $course->id)}}">
             <i class="fas fa-home"></i>
             <span class="links_name">Learning</span>
         </a>
@@ -64,7 +64,7 @@
                                             <td class="td">{{ $loop->index+1 }}</td>
                                             <td>MHV{{$student->id}}</td>
                                             <td class="td">{{ $student->name }}</td>
-                                            <td>Ngày sinh</td>
+                                            <td>{{ date('d/m/Y', strtotime($student->date_of_birth)) }}</td>
                                             <td class="td"><input type="radio" name="radio{{ $loop->index+1 }}" value="0"></td>
                                             <td class="td"><input type="radio" name="radio{{ $loop->index+1 }}" value="1"></td>
                                             <td class="td"><input type="radio" name="radio{{ $loop->index+1 }}" value="2"></td>
@@ -96,7 +96,7 @@
                                         <td>MHV{{$student->id}}</td>
                                         <td>{{ $student->name }}</td>
                                         <td class="td">{{ $student->name }}</td>
-                                        <td>Ngày sinh</td>
+                                        <td>{{ date('d/m/Y', strtotime($student->date_of_birth)) }}</td>
                                     </tr>
                                     @endforeach
                                 </table>

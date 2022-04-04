@@ -15,7 +15,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('teacher.exercises.index', $course->id) }}">
+            <a href="{{ route('teacher.lessons.index', $course->id) }}">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>

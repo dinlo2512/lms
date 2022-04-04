@@ -20,8 +20,8 @@
                         <td>{{ $class->name}}</td>
                         <td>{{ $class->subject }}</td>
                         <td>{{ $class->description }}</td>
-                        <td>{{ $class->open_date }}</td>
-                        <td>{{ $class->close_date }}</td>
+                        <td>{{ date('d/m/Y', strtotime($class->open_date)) }}</td>
+                        <td>{{ date('d/m/Y', strtotime($class->close_date)) }}</td>
                         <td><a href="{{ route('teacher.courses.show',$class->id) }}" class="btn btn-info">Chi tiết</a></td>
                     </tr>
                 @endforeach
@@ -29,4 +29,3 @@
         </div>
     </div>
 </div>
-

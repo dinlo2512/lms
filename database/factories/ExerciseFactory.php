@@ -20,7 +20,6 @@ class ExerciseFactory extends Factory
             'course_id' => Course::query()->inRandomOrder()->first()->id,
             'lesson_id' => Lesson::query()->inRandomOrder()->first()->id,
             'deadline' => $this->faker->date(),
-            'grade' => random_int(1, 100)
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Modules\Teacher\Http\Controllers;
 
 use App\Models\Course;
@@ -12,24 +11,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class GradesController extends Controller
+class LessonController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index($courseId, $lessonId, $exerciseId)
+    public function index($courseId)
     {
-        $title = "Exercises Grades";
         $course = Course::findOrFail($courseId);
-        $lesson = Lesson::findOrFail($lessonId);
-        $exercises = Exercise::findOrFail($exerciseId);
-        $grades = Grades::query()->join('users', 'users.id', '=', 'grades.user_id')
-            ->where('exercise_id', $exercises->id)->paginate(20);
-//        dd($exercises->toSql());
-        return view('teacher::grades.index',
-            compact('title', 'course','exercises','grades','lesson'));
+        $title = "Lessons";
+        $lessons = Lesson::query()->where('course_id', $course->id)->paginate('10');
+        return view('teacher::lessons.index',compact('course', 'title', 'lessons'));
     }
 
     /**
@@ -43,9 +37,9 @@ class GradesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param CreateExerciseRequest $request
+     * @param Request $request
      */
-    public function store(CreateExerciseRequest $request, int $id)
+    public function store(Request $request, int $id)
     {
 
     }
@@ -55,9 +49,15 @@ class GradesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($id)
+    public function show($courseId, $lessonId)
     {
-        return view('teacher::show');
+        $title = "Lessons";
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::query()->where('course_id', $course->id)->where('lesson_id',$lesson->id)
+        ->paginate(10);
+
+        return view('teacher::lessons.show', compact('title', 'course','lesson','exercises'));
     }
 
     /**
@@ -67,7 +67,7 @@ class GradesController extends Controller
      */
     public function edit($id)
     {
-        return view('teacher::edit');
+
     }
 
     /**

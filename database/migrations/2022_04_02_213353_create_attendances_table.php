@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExerciseUserTable extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateExerciseUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercise_user', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exercise_id')->constrained()->onUpdate('Cascade')->onDelete('Cascade');
-            $table->foreignId('user_id')->constrained()->onUpdate('Cascade')->onDelete('Cascade');
+            $table->foreignId('lesson_id');
+            $table->date('day');
+            $table->tinyInteger('status');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateExerciseUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercise_user');
+        Schema::dropIfExists('attendances');
     }
 }

@@ -23,8 +23,8 @@ class CourseController extends Controller
         $classes = Course::query()->where('teacher_id', Auth::guard('teacher')->user()->id)
             ->paginate(5);
 
-
         return view('teacher::courses.index', compact('classes','title'));
+
     }
 
     /**
@@ -58,6 +58,7 @@ class CourseController extends Controller
             $query->where('course_id', $courseid);
         })->paginate(10);
       $course = Course::findOrFail($courseid);
+
         return view('teacher::courses.show',compact('students', 'title','course'));
     }
 

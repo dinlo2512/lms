@@ -18,6 +18,7 @@ use Modules\Teacher\Http\Controllers\StudentController;
 use Modules\Teacher\Http\Controllers\CourseController;
 use Modules\Teacher\Http\Controllers\ExerciesController;
 use Modules\Teacher\Http\Controllers\GradesController;
+use Modules\Teacher\Http\Controllers\LessonController;
 
 Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::middleware('auth.teacher')->group(function(){
@@ -34,13 +35,18 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         'courses' => CourseController::class,
     ]);
     Route::get('/setting', [TeacherController::class, 'show'])->name('showTeacher');
-    Route::get('courses/{courseId?}/exercises/index', [ExerciesController::class, 'index'])->name('exercises.index');
-    Route::get('courses/{courseId}/exercises/create', [ExerciesController::class, 'create'])->name('exercises.create');
-    Route::post('courses/{courseId}/exercises', [ExerciesController::class, 'store'])->name('exercises.store');
 
-    Route::get('courses/{courseId}/exercises/{exerciseId?}/index', [GradesController::class, 'index'])->name('grades.index');
+    Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}',[LessonController::class, 'show'])->name('lessons.show');
 
-
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])
+        ->name('exercises.index');
+//    Route::get('courses/{courseId}/exercises/create', [ExerciesController::class, 'create'])
+//        ->name('exercises.create');
+//    Route::post('courses/{courseId}/exercises', [ExerciesController::class, 'store'])
+//        ->name('exercises.store');
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
+        ->name('grades.index');
 });
 
 
