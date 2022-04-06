@@ -45,6 +45,7 @@
                     <a href="" type="button" data-toggle="collapse" data-target="#collapse-menu"><i class="far fa-user"></i><h5>Điểm danh</h5></a>
                     <hr>
                     <div class="collapse" id="collapse-menu">
+                        <input type="date" readonly value="" style="padding-left: 20px; margin-left: 20px; ">
                         <div class="col-md-12 mt-1 card card-body">
                             <div class="table-responsive">
                                 <form action="">

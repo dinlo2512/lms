@@ -1,3 +1,4 @@
+
 @extends('teacher::layouts.home')
 
 @section('nav-list')
@@ -35,27 +36,50 @@
 @section('content')
 
     <div class="content-top">
-        <h3>Exericses</h3>
-        <p>Dashboard/{{$course->name}}</p>
+        <h3>Exercises</h3>
+        <p>Dashboard/{{$course->name}}/Lessons/Exercises</p>
     </div>
     <div class="content">
         <div class="main">
-            <h1> Tất cả bài học của lớp</h1>
-            <a href="{{route('teacher.exercises.create', $course->id)}}" class="btn btn-primary">Create</a>
+            <h1> Bài học: {{ $lesson->content }} </h1>
+            @if($message = Session::get('success'))
+            <div class="alert alert-success" role="alert">
+               {{ $message }}
+            </div>
+            @endif
+            <a href="{{route('teacher.exercises.create', [$course->id,$lesson->id])}}" class="btn btn-primary">Thêm bài tập</a>
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">
-                        <th>Mã</th>
-                        <th>Tên</th>
-                        <th>Deadline</th>
+                        <th>STT</th>
+                        <th>Tên bài tập</th>
+                        <th>Ngày nộp</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                     </tr>
                     @foreach($exercises as $exercise)
                         <tr>
-                            <td>{{ $exercise->id }}</td>
-                            <td>{{ $exercise->content}}</td>
-                            <td>{{ $exercise->deadline }}</td>
-                            <td><a href="{{ route('teacher.grades.index',[$course->id,$exercise->id]) }}" class="btn btn-info">Chi tiết</a></td>
+                            <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $exercise->content }}</td>
+                            <td>{{ date('d/m/Y', strtotime($exercise->deadline)) }}</td>
+                            <td><a href="{{ route('teacher.grades.index', [$course->id,$lesson->id,$exercise->id]) }}" class="btn btn-info">
+                                    Chi tiết
+                                </a>
+                            </td>
+                            <td><a href="" class="btn btn-danger">
+                                    Giao bài tập
+                                </a>
+                            </td>
+                            <td><a href="{{ route('teacher.exercises.edit', [$course->id,$lesson->id,$exercise->id]) }}" class="btn btn-primary">
+                                    Sửa
+                                </a>
+                            </td>
+                            <td><a href="" class="btn btn-warning" onclick="return confirm('Xóa bài tập này?')">
+                                    Xóa
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
 

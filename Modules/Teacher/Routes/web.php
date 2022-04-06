@@ -36,15 +36,21 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
     ]);
     Route::get('/setting', [TeacherController::class, 'show'])->name('showTeacher');
 
-    Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])->name('lessons.index');
-    Route::get('/courses/{courseId?}/lessons/{lessonId?}',[LessonController::class, 'show'])->name('lessons.show');
+    Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])
+        ->name('lessons.index');
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])
         ->name('exercises.index');
-//    Route::get('courses/{courseId}/exercises/create', [ExerciesController::class, 'create'])
-//        ->name('exercises.create');
-//    Route::post('courses/{courseId}/exercises', [ExerciesController::class, 'store'])
-//        ->name('exercises.store');
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/create', [ExerciesController::class, 'create'])
+        ->name('exercises.create');
+    Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'store'])
+        ->name('exercises.store');
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}/update', [ExerciesController::class, 'edit'])
+        ->name('exercises.edit');
+    Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}', [ExerciesController::class, 'update'])
+        ->name('exercises.update');
+
+
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
         ->name('grades.index');
 });

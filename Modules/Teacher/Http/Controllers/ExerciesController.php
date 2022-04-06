@@ -4,12 +4,14 @@ namespace Modules\Teacher\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Exercise;
+use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Teacher\Http\Requests\CreateExerciseRequest;
+use Modules\Teacher\Http\Requests\UpdateExerciseRequest;
 
 class ExerciesController extends Controller
 {
@@ -18,41 +20,50 @@ class ExerciesController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index($id)
+    public function index($courseId,$lessonId)
     {
-        $course = Course::findOrFail($id);
-        $title = "Exercises";
-        $exercises = Exercise::query()->where('course_id', $course->id)->paginate('10');
-        return view('teacher::exercises.index', compact('title', 'course','exercises'));
+        $title = "Lessons";
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::query()->where('course_id', $course->id)->where('lesson_id',$lesson->id)
+            ->paginate(10);
+
+        return view('teacher::exercises.index', compact('title', 'course','lesson','exercises'));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create($id)
+    public function create($courseId,$lessonId)
     {
         $title = "Create Exercise";
-        $course = Course::findOrFail($id);
-        return view('teacher::exercises.create', compact('title', 'course'));
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        return view('teacher::exercises.create', compact('title', 'course','lesson'));
     }
 
     /**
      * Store a newly created resource in storage.
      * @param CreateExerciseRequest $request
      */
-    public function store(CreateExerciseRequest $request, int $id)
+    public function store(CreateExerciseRequest $request, int $courseId,int $lessonId)
     {
-        $course = Course::findOrFail($id);
+//        echo "<pre>";
+//        print_r($_POST);
+//        echo "</pre>";
 
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
         Exercise::query()->create([
             'content' => $request->get('content'),
             'deadline' => $request->get('deadline'),
-            'course_id' => $course->id
+            'course_id' => $course->id,
+            'lesson_id' => $lesson->id,
         ]);
 
-        return redirect(route('teacher.exercises.index',$course->id));
-
+        return redirect(route('teacher.exercises.index',[$course->id,$lesson->id]))
+            ->with('success', 'Thêm bài tập thành công');
     }
 
     /**
@@ -70,9 +81,15 @@ class ExerciesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit($courseId,$lessonId,$exerciseId )
     {
-        return view('teacher::edit');
+        $title = 'Update Exercise';
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::findOrFail($exerciseId);
+
+        return view('teacher::exercises.show',
+            compact('title','course','lesson','exercises'));
     }
 
     /**
@@ -81,9 +98,25 @@ class ExerciesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(UpdateExerciseRequest $request, int $courseId, int $lessonId, int $exerciseId)
     {
-        //
+//        echo "<pre>";
+//        print_r($_POST);
+//        echo "</pre>";
+
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::findOrFail($exerciseId);
+
+        Exercise::query()->where('id',$exercises->id )->update([
+            'content' => $request->get('content'),
+            'deadline' => $request->get('deadline'),
+            'course_id' => $course->id,
+            'lesson_id' => $lesson->id,
+        ]);
+
+        return redirect(route('teacher.exercises.index',[$course->id,$lesson->id]))
+            ->with('success', 'Sửa bài tập thành công');
     }
 
     /**

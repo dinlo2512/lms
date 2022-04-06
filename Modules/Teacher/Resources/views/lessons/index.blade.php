@@ -36,7 +36,7 @@
 
     <div class="content-top">
         <h3>Lessons</h3>
-        <p>Dashboard/{{$course->name}}</p>
+        <p>Dashboard/{{$course->name}}/Lessons</p>
     </div>
     <div class="content">
         <div class="main">
@@ -55,7 +55,7 @@
                         <td>{{ $lesson->id }}</td>
                         <td>{{ $lesson->content }}</td>
                         <td>{{ $lesson->description }}</td>
-                        <td><a href="{{ route('teacher.lessons.show', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a></td>
+                        <td><a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a></td>
                     </tr>
                     @endforeach
 
