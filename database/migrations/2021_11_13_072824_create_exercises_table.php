@@ -17,6 +17,7 @@ class CreateExercisesTable extends Migration
             $table->id();
             $table->string('content');
             $table->date('deadline');
+            $table->integer('status')->nullable();
             $table->foreignId('course_id')->constrained()->onUpdate('Cascade')->onDelete('Cascade');
             $table->foreignId('lesson_id')->nullable()->constrained()->onUpdate('Cascade')->onDelete('Cascade');
             $table->timestamps();

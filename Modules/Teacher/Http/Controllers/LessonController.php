@@ -10,6 +10,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Teacher\Http\Requests\CreateLessonRequest;
+use Modules\Teacher\Http\Requests\UpdateLessonRequest;
 
 class LessonController extends Controller
 {
@@ -30,18 +32,29 @@ class LessonController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-    public function create($id)
+    public function create($courseId)
     {
-
+        $title = "Create Lesson";
+        $course = Course::findOrFail($courseId);
+        return view('teacher::lessons.create', compact('course','title'));
     }
 
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      */
-    public function store(Request $request, int $id)
+    public function store(CreateLessonRequest $request, int $courseId)
     {
+        $course = Course::findOrFail($courseId);
 
+        Lesson::query()->create([
+            'content' => $request->get('content'),
+            'description' => $request->get('description'),
+            'course_id' => $course->id,
+        ]);
+
+        return redirect(route('teacher.lessons.index', $course->id))
+            ->with('success', 'Tạo bài tập thành công');
     }
 
     /**
@@ -51,13 +64,11 @@ class LessonController extends Controller
      */
     public function show($courseId, $lessonId)
     {
-        $title = "Lessons";
+        $title = "Update Lessons";
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
-        $exercises = Exercise::query()->where('course_id', $course->id)->where('lesson_id',$lesson->id)
-        ->paginate(10);
 
-        return view('teacher::lessons.show', compact('title', 'course','lesson','exercises'));
+        return view('teacher::lessons.show', compact('title', 'course', 'lesson'));
     }
 
     /**
@@ -65,7 +76,7 @@ class LessonController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($id)
+    public function edit()
     {
 
     }
@@ -76,9 +87,19 @@ class LessonController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(UpdateLessonRequest $request, $courseId, $lessonId)
     {
-        //
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+
+        Lesson::query()->where('id', $lesson->id)->update([
+            'content' => $request->get('content'),
+            'description' => $request->get('description'),
+            'course_id' => $course->id,
+            ]);
+
+        return redirect(route('teacher.lessons.index', $course->id))
+            ->with('success', 'Sửa bài tập thành công');
     }
 
     /**
@@ -86,9 +107,15 @@ class LessonController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy($courseId,$lessonId)
     {
-        //
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+
+        Lesson::query()->where('id',$lesson->id )->delete();
+
+        return redirect(route('teacher.lessons.index', $course->id))
+            ->with('success', 'Xóa bài tập thành công');
     }
 }
 

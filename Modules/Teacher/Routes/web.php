@@ -38,6 +38,18 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
 
     Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])
         ->name('lessons.index');
+    Route::get('courses/{courseId?}/lessons/create', [LessonController::class, 'create'])
+        ->name('lessons.create');
+    Route::post('courses/{courseId?}/lessons/store', [LessonController::class, 'store'])
+        ->name('lessons.store');
+    Route::get('courses/{courseId?}/lessons/{lessonId?}/edit', [LessonController::class, 'show'])
+        ->name('lessons.show');
+    Route::post('courses/{courseId?}/lessons/{lessonId?}/update', [LessonController::class, 'update'])
+        ->name('lessons.update');
+    Route::get('courses/{courseId?}/lessons/{lessonId?}/delete', [LessonController::class, 'destroy'])
+        ->name('lessons.delete');
+
+
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])
         ->name('exercises.index');
@@ -49,10 +61,15 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('exercises.edit');
     Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}', [ExerciesController::class, 'update'])
         ->name('exercises.update');
-
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}/delete', [ExerciesController::class, 'destroy'])
+        ->name('exercises.delete');
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}/give', [ExerciesController::class, 'give'])
+        ->name('exercises.give');
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
         ->name('grades.index');
+
+
 });
 
 

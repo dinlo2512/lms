@@ -40,8 +40,13 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1> Tất cả bài học của lớp</h1>
-{{--            <a href="{{route('teacher.exercises.create', $course->id)}}" class="btn btn-primary">Create</a>--}}
+            <h1 class="h1"> Tất cả bài học của lớp</h1>
+            @if($message = Session::get('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ $message }}
+                </div>
+            @endif
+            <a href="{{route('teacher.lessons.create', $course->id)}}" class="btn btn-primary">Tạo bài học</a>
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">
@@ -49,13 +54,25 @@
                         <th>Tên</th>
                         <th>Thông tin</th>
                         <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     @foreach($lessons as $lesson)
                     <tr>
-                        <td>{{ $lesson->id }}</td>
+                        <td>{{ $loop->index+1 }}</td>
                         <td>{{ $lesson->content }}</td>
                         <td>{{ $lesson->description }}</td>
-                        <td><a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a></td>
+                        <td>
+                            <a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('teacher.lessons.show', [$course->id, $lesson->id]) }}" class="btn btn-primary">
+                                Sửa</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('teacher.lessons.delete', [$course->id, $lesson->id]) }}" class="btn btn-warning" onclick="return confirm('Xóa bài học này?')">
+                                Xóa</a>
+                        </td>
                     </tr>
                     @endforeach
 
@@ -63,7 +80,11 @@
             </div>
         </div>
     </div>
-
+    <style>
+       .h1{
+           padding: 10px 10px;
+       }
+    </style>
 
 
 

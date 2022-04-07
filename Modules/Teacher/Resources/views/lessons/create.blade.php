@@ -39,15 +39,13 @@
     </div>
     <div class="content">
         <div class="main">
-            <h3 style="padding-left: 20px; padding-top: 20px; ">Tạo bài tập</h3>
+            <h3 style="padding-left: 20px; padding-top: 20px; ">Tạo bài học</h3>
             <div class="form-group form" >
-                <form action="{{ route('teacher.exercises.update', [$course->id,$lesson->id,$exercises->id]) }}" method="post">
+                <form action="{{ route('teacher.lessons.store', $course->id) }}" method="post">
                     @csrf
                     <label for="content"><p>Lớp</p></label>
                     <input type="text" class="form-control" readonly value="{{ $course->name }}">
 
-                    <label for="content"><p>Bài học</p></label>
-                    <input type="text" class="form-control" readonly value="{{ $lesson->content }}">
 
                     <label for="content"><p>Nội dung</p></label>
                     @error('content')
@@ -55,17 +53,15 @@
                         <p class="error">{{$error}}</p>
                     @endforeach
                     @enderror
-                    <input type="text" name="content" id="content" class="form-control"
-                           value="{{ $exercises->content }}">
+                    <input type="text" name="content" id="content" class="form-control" value="{{old('content')}}">
 
-                    <label for="deadline"><p>Ngày nộp</p></label>
-                    @error('deadline')
-                    @foreach($errors->get('deadline') as $error)
-                        <p class="error">{{$error}}</p>
+                    <label for="deadline"><p>Mô tả</p></label>
+                    @error('description')
+                    @foreach($errors->get('description') as $error)
+                        <p class="error">{{ $error }}</p>
                     @endforeach
                     @enderror
-                    <input type="datetime-local" name="deadline" id="deadline" class="form-control"
-                           value="{{ date('Y/m/d H:i:s', strtotime($exercises->deadline)) }}">
+                    <input type="text" name="description" id="deadline" class="form-control" value="{{old('description')}}">
                     <br>
                     <button class="btn btn-primary" name="submit" > Lưu</button>
                 </form>
@@ -83,6 +79,3 @@
         }
     </style>
 @endsection
-
-
-

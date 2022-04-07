@@ -4,12 +4,14 @@ namespace Modules\Teacher\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Exercise;
+use App\Models\Grades;
 use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Modules\Teacher\Http\Requests\CreateExerciseRequest;
 use Modules\Teacher\Http\Requests\UpdateExerciseRequest;
 
@@ -27,7 +29,6 @@ class ExerciesController extends Controller
         $lesson = Lesson::findOrFail($lessonId);
         $exercises = Exercise::query()->where('course_id', $course->id)->where('lesson_id',$lesson->id)
             ->paginate(10);
-
         return view('teacher::exercises.index', compact('title', 'course','lesson','exercises'));
     }
 
@@ -116,7 +117,7 @@ class ExerciesController extends Controller
         ]);
 
         return redirect(route('teacher.exercises.index',[$course->id,$lesson->id]))
-            ->with('success', 'Sửa bài tập thành công');
+        ->with('success', 'Sửa bài tập thành công');
     }
 
     /**
@@ -124,8 +125,35 @@ class ExerciesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy($courseId,$lessonId,$exerciseId)
     {
-        //
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::findOrFail($exerciseId);
+
+        Exercise::query()->where('id',$exercises->id )->delete();
+
+        return redirect(route('teacher.exercises.index',[$course->id,$lesson->id]))
+            ->with('success', 'Xóa bài tập thành công');
+    }
+
+    public function give($courseId,$lessonId,$exerciseId)
+    {
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::findOrFail($exerciseId);
+
+        foreach ($course->users as $user){
+           Grades::query()->create([
+                'exercise_id' => $exercises->id,
+                'user_id' => $user->id,
+            ]);
+        }
+        Exercise::query()->where('id', $exercises->id)->update([
+           'status' => 1,
+        ]);
+
+        return \redirect(route('teacher.exercises.index', [$course->id,$lesson->id]))
+            ->with('success', 'Giao bài tập thành công');
     }
 }
