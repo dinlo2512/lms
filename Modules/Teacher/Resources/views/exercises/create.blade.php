@@ -52,7 +52,7 @@
                     <label for="content"><p>Nội dung</p></label>
                     @error('content')
                     @foreach($errors->get('content') as $error)
-                        <p class="error">{{$error}}</p>
+                        <p class="error">{{ $error }}</p>
                     @endforeach
                     @enderror
                     <input type="text" name="content" id="content" class="form-control" value="{{old('content')}}">
@@ -60,7 +60,7 @@
                     <label for="deadline"><p>Ngày nộp</p></label>
                     @error('deadline')
                     @foreach($errors->get('deadline') as $error)
-                        <p class="error">{{$error}}</p>
+                        <p class="error">{{ $error }}</p>
                     @endforeach
                     @enderror
                     <input type="datetime-local" name="deadline" id="deadline" class="form-control" value="{{old('deadline')}}">

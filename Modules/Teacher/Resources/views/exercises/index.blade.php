@@ -40,7 +40,7 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1 class="h1"> Bài học: {{ $lesson->content }} </h1>
+            <h1 class="h1"><u> Bài học: {{ $lesson->content }} </u></h1>
             @if($message = Session::get('success'))
                 <div class="alert alert-success" role="alert">
                     {{ $message }}
@@ -99,11 +99,6 @@
             </div>
         </div>
     </div>
-    <style>
-        .h1{
-            padding: 10px 10px;
-        }
-    </style>
 
 
 

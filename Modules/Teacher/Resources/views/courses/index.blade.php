@@ -24,9 +24,9 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1>Hello World</h1>
+            <h1 class="h1">Hello World</h1>
 
-            <p>
+            <p style="padding-left: 10px">
                 This view is loaded from module: {!! config('teacher.name') !!}
             </p>
             @include('teacher::components.courses-list')

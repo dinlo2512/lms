@@ -38,7 +38,13 @@
             <div class="profile-content">
                 <div class="profile">
                     <div class="profile-detail">
-                        <img src="{{URL('front-end/images/user.jfif')}}" alt="">
+                        <img src="
+                    @if(isset(Auth::guard('teacher')->user()->avatar))
+                    {{ asset('storage/admin/avatar/'.Auth::guard('teacher')->user()->avatar) }}
+                    @else
+                    {{ URL('/front-end/images/user.jfif') }}
+                    @endif
+                            " alt="">
                         <div class="name-job">
                             <div class="name">{{ Auth::guard('teacher')->user()->name }}</div>
                             <div class="job">Teacher</div>

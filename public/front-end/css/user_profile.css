@@ -13,10 +13,15 @@
     border: 5px solid #fff;
     border-radius: 50%;
     left: 41%;
-    background-image: url("../images/user.jfif");
-    background-size: 100% 100%;
+    /*background-image: url("../images/user.jfif");*/
+    /*background-size: 100% 100%;*/
     overflow: hidden;
 }
+.wapper img{
+    width: 100%;
+    height: 100%;
+}
+
 .img-file{
     position: absolute;
     bottom: 0;

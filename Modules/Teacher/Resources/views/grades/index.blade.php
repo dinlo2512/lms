@@ -40,7 +40,7 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1>Bài tập {{ $exercises->content }}</h1>
+            <h1 class="h1"><u>Bài tập {{ $exercises->content }}</u></h1>
             <div class="table-responsive ">
                 <table class="table table-bordered">
                     <tr class="table-secondary">

@@ -168,6 +168,9 @@ body {
 /*    opacity: 0;*/
 /*    pointer-events: none;*/
 /*}*/
+.h1{
+    padding: 10px 10px;
+}
 
 .profile-detail img {
     height: 45px;

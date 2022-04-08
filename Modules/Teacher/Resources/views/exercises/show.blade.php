@@ -34,14 +34,15 @@
 @section('content')
 
     <div class="content-top">
-        <h3>Create Exercises</h3>
+        <h3>Update Exercises</h3>
         <p>Dashboard/{{ $course->name }}/Lessons/Exercises</p>
     </div>
     <div class="content">
         <div class="main">
-            <h3 style="padding-left: 20px; padding-top: 20px; ">Tạo bài tập</h3>
-            <div class="form-group form" >
-                <form action="{{ route('teacher.exercises.update', [$course->id,$lesson->id,$exercises->id]) }}" method="post">
+            <h3 style="padding-left: 20px; padding-top: 20px; ">Sửa bài tập</h3>
+            <div class="form-group form">
+                <form action="{{ route('teacher.exercises.update', [$course->id,$lesson->id,$exercises->id]) }}"
+                      method="post">
                     @csrf
                     <label for="content"><p>Lớp</p></label>
                     <input type="text" class="form-control" readonly value="{{ $course->name }}">
@@ -67,19 +68,19 @@
                     <input type="datetime-local" name="deadline" id="deadline" class="form-control"
                            value="{{ date('Y/m/d H:i:s', strtotime($exercises->deadline)) }}">
                     <br>
-                    <button class="btn btn-primary" name="submit" > Lưu</button>
+                    <button class="btn btn-primary" name="submit"> Lưu</button>
                 </form>
             </div>
         </div>
     </div>
 
     <style>
-        .form label p{
+        .form label p {
             font-size: 25px;
         }
 
-        .form{
-            padding:6px 20px;
+        .form {
+            padding: 6px 20px;
         }
     </style>
 @endsection

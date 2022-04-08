@@ -35,6 +35,13 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         'courses' => CourseController::class,
     ]);
     Route::get('/setting', [TeacherController::class, 'show'])->name('showTeacher');
+    Route::post('/setting/{id?}/account',[TeacherController::class, 'update'])
+        ->name('setting.account');
+    Route::get('/setting/password', [TeacherController::class, 'editPassword'])
+        ->name('setting.editpassword');
+    Route::post('/setting/password/{id?}', [TeacherController::class, 'updatePassword'])
+        ->name('setting.password');
+
 
     Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])
         ->name('lessons.index');

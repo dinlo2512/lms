@@ -20,6 +20,7 @@ class Teacher extends Authenticatable
         'date_of_birth',
         'username',
         'address',
+        'avatar',
         'email',
         'phone_number',
         'password'
