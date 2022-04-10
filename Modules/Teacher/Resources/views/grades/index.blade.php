@@ -24,6 +24,13 @@
 
         </li>
         <li>
+            <a href="{{route('teacher.announcements.index',$course->id)}}">
+                <i class="fas fa-bullhorn"></i>
+                <span class="links_name">Announcements</span>
+            </a>
+
+        </li>
+        <li>
             <a href="{{route('teacher.showTeacher')}}">
                 <i class="fas fa-cog"></i>
                 <span class="links_name">Setting</span>
@@ -41,29 +48,38 @@
     <div class="content">
         <div class="main">
             <h1 class="h1"><u>Bài tập {{ $exercises->content }}</u></h1>
-            <div class="table-responsive ">
-                <table class="table table-bordered">
-                    <tr class="table-secondary">
-                        <th>STT</th>
-                        <th>Mã học viên</th>
-                        <th>Tên</th>
-                        <th>Điểm</th>
-                    </tr>
-                    @foreach($grades as $val)
-                    <tr>
-                        <td>{{ $val->id }}</td>
-                        <td>MHV{{ $val->user_id }}</td>
-                        <td>{{ $val->name }}</td>
-                        <td>{{ $val->grades }}</td>
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
+            <form action="{{ route('teacher.grades.update', [$course->id,$lesson->id,$exercises->id]) }}" method="post">
+                @csrf
+                @if($message = Session::get('success'))
+                    {{ $message }}
+                @endif
+                <div class="table-responsive ">
+                    <table class="table table-bordered">
+                        <tr class="table-secondary">
+                            <th width="5%">STT</th>
+                            <th width="10%">Mã học viên</th>
+                            <th>Tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Bài tập</th>
+                            <th width="10%">Điểm</th>
+                        </tr>
+                        @foreach($grades as $grade)
+                            <tr>
+                                <td>{{ $grade->id }}</td>
+                                <td>MHV{{ $grade->user_id }}</td>
+                                <td>{{ $grade->name }}</td>
+                                <td>{{ date('d/m/Y',strtotime($grade->date_of_birth)) }}</td>
+                                <td>bài tập</td>
+                                <td><input class="form-control" type="text" value="{{ $grade->grades }}" name="grade_{{ $grade->user_id }}"></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                    <button class="btn btn-primary" style="float: right; margin-right:60px;" name="submit">
+                        Lưu điểm</button>
+                </div>
+            </form>
         </div>
     </div>
-
-
-
 
 @endsection
 

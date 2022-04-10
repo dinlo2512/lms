@@ -14,6 +14,10 @@ use Illuminate\Routing\Controller;
 
 class GradesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.teacher');
+    }
 
     /**
      * Display a listing of the resource.
@@ -76,9 +80,27 @@ class GradesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $courseId, $lessonId, $exerciseId)
     {
-        //
+        $course = Course::findOrFail($courseId);
+        $lesson = Lesson::findOrFail($lessonId);
+        $exercises = Exercise::findOrFail($exerciseId);
+        $users = Grades::query()->where('exercise_id', $exercises->id)->get();
+
+//        foreach ($users as $user){
+//            Grades::query()->where('exercise_id', $exercises->id)
+//                ->where('user_id', $user->id)
+//                ->update([
+//               'grades' => $request->get('grade'.$user->id),
+//            ]);
+//        }
+//
+//        return redirect(route('teacher.grades.index',[$course->id,$lesson->id,$exercises->id]))
+//            ->with('success', 'Lưu điểm thành công');
+
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
     }
 
     /**

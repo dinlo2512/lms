@@ -15,6 +15,10 @@ use Modules\Teacher\Http\Requests\UpdateLessonRequest;
 
 class LessonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.teacher');
+    }
 
     /**
      * Display a listing of the resource.
@@ -54,7 +58,7 @@ class LessonController extends Controller
         ]);
 
         return redirect(route('teacher.lessons.index', $course->id))
-            ->with('success', 'Tạo bài tập thành công');
+            ->with('success', 'Tạo bài học thành công');
     }
 
     /**
@@ -99,7 +103,7 @@ class LessonController extends Controller
             ]);
 
         return redirect(route('teacher.lessons.index', $course->id))
-            ->with('success', 'Sửa bài tập thành công');
+            ->with('success', 'Sửa bài học thành công');
     }
 
     /**
@@ -115,7 +119,7 @@ class LessonController extends Controller
         Lesson::query()->where('id',$lesson->id )->delete();
 
         return redirect(route('teacher.lessons.index', $course->id))
-            ->with('success', 'Xóa bài tập thành công');
+            ->with('success', 'Xóa bài học thành công');
     }
 }
 

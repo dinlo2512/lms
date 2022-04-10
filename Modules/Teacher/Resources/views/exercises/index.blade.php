@@ -24,6 +24,13 @@
 
         </li>
         <li>
+            <a href="{{route('teacher.announcements.index',$course->id)}}">
+                <i class="fas fa-bullhorn"></i>
+                <span class="links_name">Announcements</span>
+            </a>
+
+        </li>
+        <li>
             <a href="{{route('teacher.showTeacher')}}">
                 <i class="fas fa-cog"></i>
                 <span class="links_name">Setting</span>
@@ -66,7 +73,7 @@
                             <td>{{ date('d/m/Y', strtotime($exercise->deadline)) }}</td>
                             <td><a href="{{ route('teacher.grades.index', [$course->id,$lesson->id,$exercise->id]) }}"
                                    class="btn btn-info">
-                                    Chi tiết
+                                    Điểm
                                 </a>
                             </td>
                             <td>

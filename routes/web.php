@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserCourseController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserSettingController;
+use App\Http\Controllers\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,31 +22,27 @@ Route::get('/', function () {
 });
 
 Route::prefix('/my')->name('my.')->group(function (){
-    Route::get('/',function (){
-    return view('dashboard');
-})->name('dash');
+    Route::get('/',[UserCourseController::class, 'index'])
+        ->name('dashboard');
+    Route::get('/course/{id?}',[UserCourseController::class, 'show'])
+        ->name('course');
+    Route::get('/user-profile',[UserProfileController::class, 'index'])
+        ->name('profile');
 
-    Route::get('/course',function (){
-    return view('course');
-})->name('course');
+    Route::get('/setting-profle', [UserSettingController::class, 'index'])
+        ->name('setting-profile');
+    Route::post('/setting-profle/{id?}/update', [UserSettingController::class, 'update'])
+        ->name('setting-profile.update');
+
+    Route::get('/setting-password', [UserSettingController::class, 'password'])
+        ->name('setting-password');
+    Route::post('/setting-password/{id?}/update', [UserSettingController::class, 'passwordUpdate'])
+        ->name('setting-password.update');
 });
 
-
-//Route::get('/user-profile',function (){
-//    return view('user');
-//});
-//Route::get('/login',function (){
-//    return view('login');
-//});
-Route::get('/setting-user-profile',function (){
-    return view('setting');
-});
-Route::get('/password-user-profile',function (){
-    return view('password');
-});
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -22,6 +22,13 @@
 
         </li>
         <li>
+            <a href="{{route('teacher.announcements.index',$course->id)}}">
+                <i class="fas fa-bullhorn"></i>
+                <span class="links_name">Announcements</span>
+            </a>
+
+        </li>
+        <li>
             <a href="{{ route('teacher.showTeacher') }}">
                 <i class="fas fa-cog"></i>
                 <span class="links_name">Setting</span>

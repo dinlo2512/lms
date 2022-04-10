@@ -19,6 +19,7 @@ use Modules\Teacher\Http\Controllers\CourseController;
 use Modules\Teacher\Http\Controllers\ExerciesController;
 use Modules\Teacher\Http\Controllers\GradesController;
 use Modules\Teacher\Http\Controllers\LessonController;
+use Modules\Teacher\Http\Controllers\AnnouncementController;
 
 Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::middleware('auth.teacher')->group(function(){
@@ -75,7 +76,17 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
         ->name('grades.index');
+    Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}/update', [GradesController::class, 'update'])
+        ->name('grades.update');
 
+    Route::get('/courses/{courseId?}/announcements',[AnnouncementController::class, 'index'])
+    ->name('announcements.index');
+    Route::get('/courses/{courseId?}/announcements/create',[AnnouncementController::class, 'create'])
+        ->name('announcements.create');
+    Route::post('/courses/{courseId?}/announcements/store',[AnnouncementController::class, 'store'])
+        ->name('announcements.store');
+    Route::get('/courses/{courseId?}/announcements/{announcementId?}/delete',[AnnouncementController::class, 'destroy'])
+        ->name('announcements.delete');
 
 });
 

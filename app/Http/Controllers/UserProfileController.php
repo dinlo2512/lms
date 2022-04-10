@@ -1,21 +1,14 @@
 <?php
 
-namespace Modules\Teacher\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\User;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class UserProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth.teacher');
-    }
 
     /**
      * Display a listing of the resource.
@@ -23,12 +16,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $title = "Courses";
-        $classes = Course::query()->where('teacher_id', Auth::guard('teacher')->user()->id)
-            ->paginate(5);
-
-        return view('teacher::courses.index', compact('classes','title'));
-
+        $title = "User Profile";
+        return view('user',compact('title'));
     }
 
     /**
@@ -37,7 +26,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('teacher::create');
+
     }
 
     /**
@@ -55,15 +44,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function show($courseid)
+    public function show($id)
     {
-        $title = "Course";
-        $students = User::whereHas('courses', function (Builder $query) use ($courseid) {
-            $query->where('course_id', $courseid);
-        })->paginate(10);
-      $course = Course::findOrFail($courseid);
 
-        return view('teacher::courses.show',compact('students', 'title','course'));
     }
 
     /**
@@ -71,9 +54,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit($courseid)
+    public function edit($id)
     {
-        return view('teacher::edit');
+
     }
 
     /**
@@ -82,7 +65,7 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $courseid)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -92,8 +75,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($courseid)
+    public function destroy($id)
     {
         //
     }
 }
+

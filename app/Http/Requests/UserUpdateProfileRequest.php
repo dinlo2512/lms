@@ -1,11 +1,21 @@
 <?php
 
-namespace Modules\Teacher\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TeacherAccountRequest extends FormRequest
+class UserUpdateProfileRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,18 +42,6 @@ class TeacherAccountRequest extends FormRequest
             'phone_number.numeric' => '* Số điện thoại không hợp lệ',
             'address.required' => '* Địa chỉ không được để trống',
             'avatar.image' => '* Ảnh không đúng định dạng',
-
         ];
     }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 }
-

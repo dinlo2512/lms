@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-top">
         <h3>User Profile</h3>
-        <p>Dashboard / My Courses / User</p>
+        <p>Dashboard / User</p>
     </div>
         <div class="content">
             <div class="main">
@@ -12,7 +12,7 @@
                             <div class="card-body">
                                 <img src="{{URL('front-end/images/user.jfif')}}" alt="" class="rounded-circle" width="150px">
                                 <div class="mt-3">
-                                    <h3>NAME NAME</h3>
+                                    <h3>{{ Auth::user()->name }}</h3>
                                     <p>Student</p>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                         <h5>Họ và tên: </h5>
                                     </div>
                                     <div class="col-md-9 text-secondary">
-                                        Name Name
+                                        {{ Auth::user()->name }}
                                     </div>
                                 </div>
                                 <hr>
@@ -36,7 +36,7 @@
                                         <h5>Email: </h5>
                                     </div>
                                     <div class="col-md-9 text-secondary">
-                                        email@gmail.com
+                                       {{ Auth::user()->email }}
                                     </div>
                                 </div>
                                 <hr>
@@ -45,7 +45,7 @@
                                         <h5>Điện thoại: </h5>
                                     </div>
                                     <div class="col-md-9 text-secondary">
-                                        0123456789
+                                        {{ Auth::user()->phone_number }}
                                     </div>
                                 </div>
                                 <hr>
@@ -54,7 +54,7 @@
                                         <h5>Địa chỉ: </h5>
                                     </div>
                                     <div class="col-md-9 text-secondary">
-                                        Địa chỉ, địa chỉ, địa chỉ
+                                        {{ Auth::user()->address }}
                                     </div>
                                 </div>
                                 <hr>

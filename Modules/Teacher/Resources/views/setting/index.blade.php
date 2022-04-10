@@ -55,6 +55,11 @@
                                             <h3>{{Auth::guard('teacher')->user()->name}}</h3>
                                             <p>Teacher</p>
                                         </div>
+                                        @error('avatar')
+                                        @foreach($errors->get('avatar') as $error)
+                                            <p class="error">{{$error}}</p>
+                                        @endforeach
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="card mb-3 ">
@@ -103,6 +108,21 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-md-3">
+                                                <h5>Ngày sinh: </h5>
+                                            </div>
+                                            <div class="col-md-9 text-secondary">
+                                                @error('date_of_birth')
+                                                @foreach($errors->get('date_of_birth') as $error)
+                                                    <p class="error">{{$error}}</p>
+                                                @endforeach
+                                                @enderror
+                                                <input class="form-control" name="date_of_birth" type="text"
+                                                       value="{{Auth::guard('teacher')->user()->date_of_birth}}">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-3">
                                                 <h5>Điện thoại: </h5>
                                             </div>
                                             <div class="col-md-9 text-secondary">
@@ -132,7 +152,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="submit" value="Lưu" class="btn btn-primary">
+                                <input type="submit" value="Lưu thông tin" class="btn btn-primary">
                             </div>
                         </div>
                     </div>

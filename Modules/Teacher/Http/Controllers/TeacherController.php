@@ -12,6 +12,10 @@ use Modules\Teacher\Http\Requests\TeacherPasswordRequest;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.teacher');
+    }
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -80,6 +84,7 @@ class TeacherController extends Controller
                 'phone_number' => $request->get('phone_number'),
                 'address' => $request->get('address'),
                 'avatar' => $name,
+                'date_of_birth' => $request->get('date_of_birth'),
             ]);
 
             $file->storeAs('public/admin/avatar',$name);
@@ -94,6 +99,7 @@ class TeacherController extends Controller
                 'name' => $request->get('name'),
                 'phone_number' => $request->get('phone_number'),
                 'address' => $request->get('address'),
+                'date_of_birth' => $request->get('date_of_birth'),
             ]);
 
             return redirect(route('teacher.showTeacher'))

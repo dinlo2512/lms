@@ -1,23 +1,21 @@
 @extends('my')
 @section('content')
     <div class="content-top">
-        <h3>Name Course</h3>
-        <p>Dashboard / My Courses / Name Course</p>
+        <h3>{{ $course->name }}</h3>
+        <p>Dashboard / My Courses / {{ $course->name }}</p>
     </div>
     <div class="content">
         <div class="main">
+            @foreach($lessons as $lesson)
             <div class="lesson">
-                <p class="p">chương 1:</p>
+                <p class="p" type="button" data-toggle="collapse" data-target="#collapse-menu-{{ $loop->index+1 }}" >Bài học {{ $lesson->content }}:</p>
+                <div class="collapse" id="collapse-menu-{{ $loop->index+1 }}">
+                    <div class="card card-body">
+
+                    </div>
+                </div>
             </div>
-            <div class="lesson">
-                <p class="p">chương 2:</p>
-            </div>
-            <div class="lesson">
-                <p class="p">chương 3:</p>
-            </div>
-            <div class="lesson">
-                <p class="p">chương 4:</p>
-            </div>
+            @endforeach
         </div>
     </div>
 
