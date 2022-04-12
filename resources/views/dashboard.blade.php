@@ -1,7 +1,7 @@
 @extends('my')
 @section('content')
     <div class="content-top">
-        <h3>Chào mừng trở lại!</h3>
+        <h3>COURSES</h3>
         <p>Dashboard / My Courses</p>
     </div>
         <div class="container" id="course">

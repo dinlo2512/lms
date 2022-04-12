@@ -6,6 +6,7 @@ use App\Http\Controllers\UserCourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserSettingController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\SiteHomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/site-home', [SiteHomeController::class, 'index'])
+    ->name('sitehome');
 Route::prefix('/my')->name('my.')->group(function (){
     Route::get('/',[UserCourseController::class, 'index'])
         ->name('dashboard');
@@ -38,6 +41,14 @@ Route::prefix('/my')->name('my.')->group(function (){
         ->name('setting-password');
     Route::post('/setting-password/{id?}/update', [UserSettingController::class, 'passwordUpdate'])
         ->name('setting-password.update');
+
+    Route::get('/course/{courseId?}/lesson/{lessonId?}', [UserCourseController::class, 'lesson'])
+        ->name('lesson');
+    Route::get('/course/{courseId?}/lesson/{lessonId?}/exercise/{exerciseId}', [UserCourseController::class, 'exercise'])
+        ->name('exercise');
+    Route::post('exercise/{exerciseId}/{userId}', [UserCourseController::class, 'store'])
+        ->name('exercises.post');
+
 });
 
 
