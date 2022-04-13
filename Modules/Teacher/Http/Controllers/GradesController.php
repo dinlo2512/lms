@@ -85,22 +85,20 @@ class GradesController extends Controller
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
         $exercises = Exercise::findOrFail($exerciseId);
-        $users = Grades::query()->where('exercise_id', $exercises->id)->get();
+        $grades = Grades::query()->where('exercise_id', $exercises->id)->get();
 
-//        foreach ($users as $user){
-//            Grades::query()->where('exercise_id', $exercises->id)
-//                ->where('user_id', $user->id)
-//                ->update([
-//               'grades' => $request->get('grade'.$user->id),
-//            ]);
-//        }
-//
-//        return redirect(route('teacher.grades.index',[$course->id,$lesson->id,$exercises->id]))
-//            ->with('success', 'Lưu điểm thành công');
+        foreach ($grades as $grade){
+            Grades::query()->where('exercise_id', $exercises->id)
+                ->where('user_id', $grade->user_id)
+                ->update([
+               'grades' => $request->get('grade_'.$grade->user_id),
+            ]);
+        }
 
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+
+        return redirect(route('teacher.grades.index',[$course->id,$lesson->id,$exercises->id]))
+            ->with('success', 'Lưu điểm thành công');
+
     }
 
     /**

@@ -47,11 +47,13 @@
     </div>
     <div class="content">
         <div class="main">
-            <h1 class="h1"><u>Bài tập {{ $exercises->content }}</u></h1>
+            <h1 class="h1"><u>Bài tập: {{ $exercises->content }}</u></h1>
             <form action="{{ route('teacher.grades.update', [$course->id,$lesson->id,$exercises->id]) }}" method="post">
                 @csrf
                 @if($message = Session::get('success'))
-                    {{ $message }}
+                    <div class="alert alert-success" role="alert">
+                        {{ $message }}
+                    </div>
                 @endif
                 <div class="table-responsive ">
                     <table class="table table-bordered">

@@ -29,6 +29,8 @@ Route::prefix('/my')->name('my.')->group(function (){
         ->name('dashboard');
     Route::get('/course/{id?}',[UserCourseController::class, 'show'])
         ->name('course');
+    Route::get('/course/{id?}/view',[UserCourseController::class, 'view'])
+        ->name('lesson.view');
     Route::get('/user-profile',[UserProfileController::class, 'index'])
         ->name('profile');
 
@@ -44,10 +46,12 @@ Route::prefix('/my')->name('my.')->group(function (){
 
     Route::get('/course/{courseId?}/lesson/{lessonId?}', [UserCourseController::class, 'lesson'])
         ->name('lesson');
-    Route::get('/course/{courseId?}/lesson/{lessonId?}/exercise/{exerciseId}', [UserCourseController::class, 'exercise'])
+    Route::get('/course/{courseId?}/lesson/{lessonId?}/exercise/{exerciseId?}', [UserCourseController::class, 'exercise'])
         ->name('exercise');
-    Route::post('exercise/{exerciseId}/{userId}', [UserCourseController::class, 'store'])
+    Route::post('exercise/{exerciseId?}/{userId?}', [UserCourseController::class, 'store'])
         ->name('exercises.post');
+    Route::get('exercise/{id?}/view', [UserCourseController::class, 'viewExercises'])
+        ->name('exercises.view');
 
 });
 

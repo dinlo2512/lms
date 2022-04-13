@@ -60,6 +60,7 @@
                         <th>STT</th>
                         <th>Tên</th>
                         <th>Thông tin</th>
+                        <th>File Bài Giảng</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -69,6 +70,11 @@
                         <td>{{ $loop->index+1 }}</td>
                         <td>{{ $lesson->content }}</td>
                         <td>{{ $lesson->description }}</td>
+                        <td>
+                            @if(isset($lesson->file))
+                            <a href="{{ route('teacher.lessons.view',[$course->id,$lesson->id]) }}">Hiển thị</a>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a>
                         </td>

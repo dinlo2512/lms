@@ -17,6 +17,7 @@ class CreateLessonsTable extends Migration
             $table->id();
             $table->string('content');
             $table->string('description')->nullable();
+            $table->text('file')->nullable();
             $table->foreignId('course_id')->constrained()->onUpdate('Cascade')->onDelete('Cascade');
             $table->timestamps();
         });

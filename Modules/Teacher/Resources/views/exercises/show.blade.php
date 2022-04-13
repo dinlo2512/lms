@@ -39,7 +39,6 @@
 @endsection
 
 @section('content')
-
     <div class="content-top">
         <h3>Update Exercises</h3>
         <p>Dashboard/{{ $course->name }}/Lessons/Exercises</p>
@@ -72,8 +71,8 @@
                         <p class="error">{{$error}}</p>
                     @endforeach
                     @enderror
-                    <input type="datetime-local" name="deadline" id="deadline" class="form-control"
-                           value="{{ date('Y/m/d H:i:s', strtotime($exercises->deadline)) }}">
+                    <input type="date" name="deadline" id="deadline" class="form-control"
+                           value="{{ date('Y-m-d', strtotime($exercises->deadline)) }}">
                     <br>
                     <button class="btn btn-primary" name="submit"> Lưu</button>
                 </form>

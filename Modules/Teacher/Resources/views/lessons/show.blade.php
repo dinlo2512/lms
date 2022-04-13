@@ -48,7 +48,7 @@
         <div class="main">
             <h3 style="padding-left: 20px; padding-top: 20px; ">Tạo bài học</h3>
             <div class="form-group form" >
-                <form action="{{ route('teacher.lessons.update', [$course->id, $lesson->id]) }}" method="post">
+                <form action="{{ route('teacher.lessons.update', [$course->id, $lesson->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <label for="content"><p>Lớp</p></label>
                     <input type="text" class="form-control" readonly value="{{ $course->name }}">
@@ -69,6 +69,8 @@
                     @endforeach
                     @enderror
                     <input type="text" name="description" id="deadline" class="form-control" value="{{ $lesson->description }}">
+                    <br>
+                    <input type="file" name="file" class="form-control">
                     <br>
                     <button class="btn btn-primary" name="submit" > Lưu</button>
                 </form>

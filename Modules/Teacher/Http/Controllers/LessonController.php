@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Teacher\Http\Controllers;
 
 use App\Models\Course;
@@ -29,7 +30,7 @@ class LessonController extends Controller
         $course = Course::findOrFail($courseId);
         $title = "Lessons";
         $lessons = Lesson::query()->where('course_id', $course->id)->paginate('10');
-        return view('teacher::lessons.index',compact('course', 'title', 'lessons'));
+        return view('teacher::lessons.index', compact('course', 'title', 'lessons'));
     }
 
     /**
@@ -40,7 +41,7 @@ class LessonController extends Controller
     {
         $title = "Create Lesson";
         $course = Course::findOrFail($courseId);
-        return view('teacher::lessons.create', compact('course','title'));
+        return view('teacher::lessons.create', compact('course', 'title'));
     }
 
     /**
@@ -50,15 +51,30 @@ class LessonController extends Controller
     public function store(CreateLessonRequest $request, int $courseId)
     {
         $course = Course::findOrFail($courseId);
+        if ($request->has('file')) {
+            $file = $request->file('file');
+                $name = time() . '.' . $file->getClientOriginalName();
+                Lesson::query()->create([
+                    'content' => $request->get('content'),
+                    'description' => $request->get('description'),
+                    'course_id' => $course->id,
+                    'file' => $name,
+                ]);
+                $file->storeAs('public/admin/file',$name);
 
-        Lesson::query()->create([
-            'content' => $request->get('content'),
-            'description' => $request->get('description'),
-            'course_id' => $course->id,
-        ]);
-
-        return redirect(route('teacher.lessons.index', $course->id))
-            ->with('success', 'Tạo bài học thành công');
+            return redirect(route('teacher.lessons.index', $course->id))
+                ->with('success', 'Tạo bài học thành công');
+        }else {
+            Lesson::query()->create([
+                'content' => $request->get('content'),
+                'description' => $request->get('description'),
+                'course_id' => $course->id,
+                'file' => null,
+            ]);
+            return redirect(route('teacher.lessons.index', $course->id))
+                ->with('success', 'Tạo bài học thành công');
+        }
+//        return $request->all();
     }
 
     /**
@@ -80,9 +96,14 @@ class LessonController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function edit()
+    public function view($courseId, $lessonId)
     {
-
+        $course = Course::findOrFail($courseId);
+        $title = "Lessons";
+//        $lesson = Lesson::query()->where('course_id', $course->id)
+//        ->where('id', $lessonId)->get();
+        $lesson = Lesson::findOrFail($lessonId);
+        return view('teacher::lessons.view', compact('course', 'title', 'lesson'));
     }
 
     /**
@@ -95,15 +116,32 @@ class LessonController extends Controller
     {
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
-
-        Lesson::query()->where('id', $lesson->id)->update([
+        $file = $request->file('file');
+       if (isset($file)){
+            $name = time() . '.' . $file->getClientOriginalName();
+            Lesson::query()->where('id', $lesson->id)->update([
             'content' => $request->get('content'),
             'description' => $request->get('description'),
             'course_id' => $course->id,
-            ]);
+            'file' => $name,
+        ]);
+           $file->storeAs('public/admin/file',$name);
+           if(isset($lesson->file)){
+               unlink(storage_path('app/public/admin/file/'.$lesson->file));
+           }
 
-        return redirect(route('teacher.lessons.index', $course->id))
-            ->with('success', 'Sửa bài học thành công');
+           return redirect(route('teacher.lessons.index', $course->id))
+               ->with('success', 'Sửa bài học thành công');
+       }else{
+           Lesson::query()->where('id', $lesson->id)->update([
+               'content' => $request->get('content'),
+               'description' => $request->get('description'),
+               'course_id' => $course->id,
+           ]);
+
+           return redirect(route('teacher.lessons.index', $course->id))
+               ->with('success', 'Sửa bài học thành công');
+       }
     }
 
     /**
@@ -111,12 +149,16 @@ class LessonController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($courseId,$lessonId)
+    public function destroy($courseId, $lessonId)
     {
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
 
-        Lesson::query()->where('id',$lesson->id )->delete();
+        Lesson::query()->where('id', $lesson->id)->delete();
+
+        if(isset($lesson->file)){
+            unlink(storage_path('app/public/admin/file/'.$lesson->file));
+        }
 
         return redirect(route('teacher.lessons.index', $course->id))
             ->with('success', 'Xóa bài học thành công');

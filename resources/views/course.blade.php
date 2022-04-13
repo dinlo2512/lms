@@ -13,6 +13,7 @@
                     <div class="card text-white bg-info mb-3" style="max-width: 100%;">
                         <div class="card-header">
                             <p class="card-text">{{ $lesson->description }}</p>
+                            <a href="{{ route('my.lesson.view', $lesson->id) }}">{{ $lesson->file }}</a>
                         </div>
                     </div>
                     <div class="card card-body">

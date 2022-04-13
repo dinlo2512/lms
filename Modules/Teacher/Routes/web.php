@@ -56,7 +56,8 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('lessons.update');
     Route::get('courses/{courseId?}/lessons/{lessonId?}/delete', [LessonController::class, 'destroy'])
         ->name('lessons.delete');
-
+    Route::get('/courses/{courseId?}/lessons/{lessonId?}/view', [LessonController::class, 'view'])
+        ->name('lessons.view');
 
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])

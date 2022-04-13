@@ -9,6 +9,11 @@
             @csrf
             <div class="main">
                 <h1 class="h1">{{ $exercise->content }}</h1>
+                @if($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        {{ $message }}
+                    </div>
+                @endif
                 <br><br>
                 <input type="text" value="{{ $course->name }}" class="form-control" readonly>
                 <br>
@@ -19,6 +24,10 @@
                 </textarea>
                 <br>
                 <input type="file" name="exercise" class="form-control">
+                <br>
+                @if(isset($grade->file))
+                    <a href="{{ route('my.exercises.view', $grade->id) }}">{{ $grade->file }}</a>
+                @endif
                 <br>
                 <button class="btn btn-success">Nộp bài</button>
             </div>
