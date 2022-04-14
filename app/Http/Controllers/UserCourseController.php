@@ -56,7 +56,8 @@ class UserCourseController extends Controller
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
         $exercise = Exercise::findOrFail($exerciseId);
-        $grade = Grades::findOrFail($exerciseId)->findOrFail(Auth::user()->id);
+        $grade = Grades::where('exercise_id',$exerciseId)->where('user_id',Auth::user()->id)->first();
+//        dd($grade->file);
 
         return view('exercise', compact('title', 'lesson', 'course', 'exercise','grade'));
     }
@@ -64,18 +65,17 @@ class UserCourseController extends Controller
     public function store(SubmitExerciseRequest $request, $exerciseId, $userId)
     {
         $file = $request->file('exercise');
+        $grade = Grades::where('exercise_id',$exerciseId)->where('user_id',$userId)->first();
         if (isset($file)){
             $name = time() . '.' . $file->getClientOriginalName();
             Grades::query()->where('exercise_id', $exerciseId)
                 ->where('user_id', $userId)->update([
                     'file' => $name,
                 ]);
-        }
-
-        $grade = Grades::findOrFail($exerciseId)->findOrFail($userId);
-        $file->storeAs('public/user/file', $name);
-        if (isset($grade->file)) {
-            unlink(storage_path('app/public/user/file/' . $grade->file));
+            $file->storeAs('public/user/file', $name);
+            if (isset($grade->file)) {
+                unlink(storage_path('app/public/user/file/' . $grade->file));
+            }
         }
 
         return redirect()->back()->with('success', 'Nộp bài tập thành công');

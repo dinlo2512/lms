@@ -27,9 +27,12 @@
                 <br>
                 @if(isset($grade->file))
                     <a href="{{ route('my.exercises.view', $grade->id) }}">{{ $grade->file }}</a>
-                @endif
+                    <br>
+                    <button class="btn btn-primary">Nộp lại</button>
+                @else
                 <br>
                 <button class="btn btn-success">Nộp bài</button>
+                @endif
             </div>
         </form>
     </div>

@@ -12,7 +12,9 @@
                 <div class="collapse" id="collapse-menu-{{ $loop->index+1 }}">
                     <div class="card text-white bg-info mb-3" style="max-width: 100%;">
                         <div class="card-header">
-                            <p class="card-text">{{ $lesson->description }}</p>
+                            <h5> &#8738; Mục tiêu:</h5>
+                            <p class="card-text" style="padding-left: 20px"> - {{ $lesson->description }}</p>
+                            <h5> &#8883; Nội dung bài học:</h5>
                             <a href="{{ route('my.lesson.view', $lesson->id) }}">{{ $lesson->file }}</a>
                         </div>
                     </div>
