@@ -37,6 +37,13 @@
             </a>
 
         </li>
+        <li>
+            <a href="">
+                <i class="fas fa-calendar"></i>
+                <span class="links_name">Statistic</span>
+            </a>
+
+        </li>
     </ul>
 @endsection
 @section('content')
@@ -61,8 +68,8 @@
                             <th width="5%">STT</th>
                             <th width="10%">Mã học viên</th>
                             <th>Tên</th>
-                            <th>Ngày sinh</th>
-                            <th>Bài tập</th>
+                            <th width="10%">Ngày sinh</th>
+                            <th width="15%">Bài tập</th>
                             <th width="10%">Điểm</th>
                         </tr>
                         @foreach($grades as $grade)
@@ -71,7 +78,7 @@
                                 <td>MHV{{ $grade->user_id }}</td>
                                 <td>{{ $grade->name }}</td>
                                 <td>{{ date('d/m/Y',strtotime($grade->date_of_birth)) }}</td>
-                                <td>bài tập</td>
+                                <td><a href="{{ route('teacher.grades.view', $grade->id) }}">{{ $grade->file }}</a></td>
                                 <td><input class="form-control" type="text" value="{{ $grade->grades }}" name="grade_{{ $grade->user_id }}"></td>
                             </tr>
                         @endforeach

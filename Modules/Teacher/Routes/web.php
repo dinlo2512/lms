@@ -20,6 +20,7 @@ use Modules\Teacher\Http\Controllers\ExerciesController;
 use Modules\Teacher\Http\Controllers\GradesController;
 use Modules\Teacher\Http\Controllers\LessonController;
 use Modules\Teacher\Http\Controllers\AnnouncementController;
+use Modules\Teacher\Http\Controllers\StatisticController;
 
 Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::middleware('auth.teacher')->group(function(){
@@ -77,6 +78,8 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
         ->name('grades.index');
+    Route::get('/exercises/{id?}', [GradesController::class, 'show'])
+        ->name('grades.view');
     Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}/update', [GradesController::class, 'update'])
         ->name('grades.update');
 
@@ -88,6 +91,9 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('announcements.store');
     Route::get('/courses/{courseId?}/announcements/{announcementId?}/delete',[AnnouncementController::class, 'destroy'])
         ->name('announcements.delete');
+
+    Route::get('/courses/{courseId?}/statistic', [StatisticController::class, 'index'])
+        ->name('statistic.index');
 
 });
 

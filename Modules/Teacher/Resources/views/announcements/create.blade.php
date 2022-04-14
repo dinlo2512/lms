@@ -36,6 +36,13 @@
             </a>
 
         </li>
+        <li>
+            <a href="">
+                <i class="fas fa-calendar"></i>
+                <span class="links_name">Statistic</span>
+            </a>
+
+        </li>
     </ul>
 @endsection
 

@@ -37,6 +37,13 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
+                <i class="fas fa-calendar"></i>
+                <span class="links_name">Statistic</span>
+            </a>
+
+        </li>
     </ul>
 @endsection
 
@@ -55,7 +62,10 @@
                     <div class="collapse" id="collapse-menu">
                         <div style="padding-left: 20px; margin-left: 20px; ">
                             <label for="">Ngày học: </label>
-                            <input type="date" readonly value="">
+                            @php
+                            $date = date('Y-m-d');
+                            @endphp
+                            <input type="date" readonly value="{{ $date }}">
                         </div>
                         <div class="col-md-12 mt-1 card card-body">
                             <div class="table-responsive">

@@ -37,31 +37,14 @@ class GradesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function create($id)
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param CreateExerciseRequest $request
-     */
-    public function store(CreateExerciseRequest $request, int $id)
-    {
-
-    }
-
-    /**
      * Show the specified resource.
      * @param int $id
      * @return Renderable
      */
     public function show($id)
     {
-        return view('teacher::show');
+        $file = Grades::findOrFail($id);
+        return view('teacher::grades.view',compact('file'));
     }
 
     /**
