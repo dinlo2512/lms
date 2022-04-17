@@ -17,7 +17,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.lessons.index', $course->id)}}">
+            <a href="{{route('teacher.lessons.index', $course->id)}}" class="actived">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -38,7 +38,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -96,21 +96,21 @@
                                 @endif
                             </td>
                             <td><a href="{{ route('teacher.exercises.edit', [$course->id,$lesson->id,$exercise->id]) }}"
-                                   class="btn btn-primary">
+                                   class="btn btn-warning">
                                     Sửa
                                 </a>
                             </td>
                             <td>
                                 <a href="{{ route('teacher.exercises.delete', [$course->id,$lesson->id,$exercise->id]) }}"
-                                   class="btn btn-warning" onclick="return confirm('Xóa bài tập này?')">
+                                   class="btn btn-outline-danger" onclick="return confirm('Xóa bài tập này?')">
                                     Xóa
                                 </a>
                             </td>
                         </tr>
                     @endforeach
-
                 </table>
             </div>
+            {{ $exercises->links('teacher::paginate.my_paginate') }}
         </div>
     </div>
 

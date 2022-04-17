@@ -21,6 +21,7 @@ use Modules\Teacher\Http\Controllers\GradesController;
 use Modules\Teacher\Http\Controllers\LessonController;
 use Modules\Teacher\Http\Controllers\AnnouncementController;
 use Modules\Teacher\Http\Controllers\StatisticController;
+use Modules\Teacher\Http\Controllers\AdminController;
 
 Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::middleware('auth.teacher')->group(function(){
@@ -60,6 +61,10 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/view', [LessonController::class, 'view'])
         ->name('lessons.view');
 
+    Route::post('/courses/{courseId?}/attendance', [CourseController::class, 'attendanceStore'])
+        ->name('course.attendance');
+    Route::post('/courses/{courseId?}/attendance/update', [CourseController::class, 'attendanceUpdate'])
+        ->name('course.attendance.update');
 
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])
         ->name('exercises.index');
@@ -95,6 +100,16 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::get('/courses/{courseId?}/statistic', [StatisticController::class, 'index'])
         ->name('statistic.index');
 
+    Route::get('/admin', [AdminController::class, 'index'])
+        ->name('admin.index');
+    Route::get('/admin/courses', [AdminController::class, 'allCourse'])
+        ->name('admin.allCourse');
+    Route::get('/admin/user', [AdminController::class, 'allUser'])
+        ->name('admin.allUser');
+    Route::get('/admin/teacher', [AdminController::class, 'allTeacher'])
+        ->name('admin.allTeacher');
+    Route::get('/admin/notification', [AdminController::class, 'allNotification'])
+        ->name('admin.allNotification');
 });
 
 

@@ -11,7 +11,6 @@ class Attendance extends Model
 
     protected $fillable = [
         'course_id',
-        'lesson_id',
         'day',
         'status',
         'user_id',

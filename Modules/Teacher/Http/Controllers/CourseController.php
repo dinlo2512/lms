@@ -2,6 +2,7 @@
 
 namespace Modules\Teacher\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\Teacher\Http\Requests\AttendanceStoreRequest;
 
 class CourseController extends Controller
 {
@@ -61,9 +63,18 @@ class CourseController extends Controller
         $students = User::whereHas('courses', function (Builder $query) use ($courseid) {
             $query->where('course_id', $courseid);
         })->paginate(10);
-      $course = Course::findOrFail($courseid);
+        $course = Course::findOrFail($courseid);
+        $date = date('Y-m-d');
+//        $date = '2022-01-06';
+        $get = Attendance::select(['day'])->where('day', $date)->where('course_id', $course->id)->count();
+        $attendances = Attendance::query()->join('users', 'users.id', '=', 'attendances.user_id')
+            ->where('day', $date)
+            ->where('course_id', $course->id)
+            ->get();
+//        dump($get);
+//        dd($attendances->toSql());
 
-        return view('teacher::courses.show',compact('students', 'title','course'));
+        return view('teacher::courses.show',compact('students', 'title','course','get','attendances'));
     }
 
     /**
@@ -95,5 +106,44 @@ class CourseController extends Controller
     public function destroy($courseid)
     {
         //
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function attendanceStore(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        foreach ($course->users as $user){
+            Attendance::query()->create([
+                'day' => $request->get('date'),
+                'course_id' => $course->id,
+                'user_id' => $user->id,
+                'status' => $request->get('radio'.$user->id),
+            ]);
+        }
+
+        return redirect(route('teacher.courses.show', $course->id))
+            ->with('success', 'Cập nhật điểm danh thành công');
+
+    }
+
+    public function attendanceUpdate(Request $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        foreach ($course->users as $user){
+            Attendance::query()->where('day', $request->get('date'))
+                ->where('user_id', $user->id)
+                ->update([
+                'status' => $request->get('radio'.$user->id),
+            ]);
+        }
+
+        return redirect(route('teacher.courses.show', $course->id))
+            ->with('success', 'Cập nhật điểm danh thành công');
+////
+//        echo "<pre>";
+//        print_r($request->all());
+//        echo "</pre>";
     }
 }

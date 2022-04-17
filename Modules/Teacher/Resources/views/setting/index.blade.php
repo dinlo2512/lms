@@ -9,7 +9,7 @@
 
         </li>
         <li>
-            <a href="{{ route('teacher.showTeacher') }}">
+            <a href="{{ route('teacher.showTeacher') }}" class="actived">
                 <i class="fas fa-cog"></i>
                 <span class="links_name">Setting</span>
             </a>

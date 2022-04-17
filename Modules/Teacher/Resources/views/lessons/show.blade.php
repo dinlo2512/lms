@@ -15,7 +15,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('teacher.lessons.index', $course->id) }}">
+            <a href="{{ route('teacher.lessons.index', $course->id) }}" class="actived">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -36,7 +36,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>

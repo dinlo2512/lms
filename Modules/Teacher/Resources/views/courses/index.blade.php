@@ -3,7 +3,7 @@
 @section('nav-list')
     <ul class="nav-list">
         <li>
-            <a href="{{route('teacher.courses.index')}}">
+            <a href="{{route('teacher.courses.index')}}" class="{{ request()->path() ? "actived" : "" }}">
                 <i class="fas fa-th-large"></i>
                 <span class="links_name">Dashboard</span>
             </a>

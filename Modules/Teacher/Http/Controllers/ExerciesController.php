@@ -32,7 +32,7 @@ class ExerciesController extends Controller
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
         $exercises = Exercise::query()->where('course_id', $course->id)->where('lesson_id',$lesson->id)
-            ->paginate(10);
+            ->paginate(6);
         return view('teacher::exercises.index', compact('title', 'course','lesson','exercises'));
     }
 

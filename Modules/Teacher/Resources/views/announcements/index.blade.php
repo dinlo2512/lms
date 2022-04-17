@@ -25,7 +25,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.announcements.index',$course->id)}}">
+            <a href="{{route('teacher.announcements.index',$course->id)}}" class="actived">
                 <i class="fas fa-bullhorn"></i>
                 <span class="links_name">Announcements</span>
             </a>
@@ -39,7 +39,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -79,7 +79,7 @@
                         <td>{{ date('d/m/Y',strtotime($announcement->created_at)) }}</td>
                         <td>
                             <a href="{{ route('teacher.announcements.delete', [$course->id, $announcement->id]) }}"
-                               class="btn btn-warning" onclick="return confirm('Xóa thông báo này?')">
+                               class="btn btn-danger" onclick="return confirm('Xóa thông báo này?')">
                                 Xóa
                             </a>
                         </td>
@@ -87,6 +87,7 @@
                     @endforeach
                 </table>
             </div>
+            {{ $announcements->links('teacher::paginate.my_paginate') }}
         </div>
     </div>
 

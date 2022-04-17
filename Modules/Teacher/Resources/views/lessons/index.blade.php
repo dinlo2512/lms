@@ -17,7 +17,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.lessons.index', $course->id)}}">
+            <a href="{{route('teacher.lessons.index', $course->id)}}" class="actived">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -38,7 +38,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -73,34 +73,41 @@
                         <th></th>
                     </tr>
                     @foreach($lessons as $lesson)
-                    <tr>
-                        <td>{{ $loop->index+1 }}</td>
-                        <td>{{ $lesson->content }}</td>
-                        <td>{{ $lesson->description }}</td>
-                        <td>
-                            @if(isset($lesson->file))
-                            <a href="{{ route('teacher.lessons.view',[$course->id,$lesson->id]) }}">Hiển thị</a>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}" class="btn btn-info">Chi tiết</a>
-                        </td>
-                        <td>
-                            <a href="{{ route('teacher.lessons.show', [$course->id, $lesson->id]) }}" class="btn btn-primary">
-                                Sửa</a>
-                        </td>
-                        <td>
-                            <a href="{{ route('teacher.lessons.delete', [$course->id, $lesson->id]) }}" class="btn btn-warning" onclick="return confirm('Xóa bài học này?')">
-                                Xóa</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $loop->index+1 }}</td>
+                            <td>{{ $lesson->content }}</td>
+                            <td>{{ $lesson->description }}</td>
+                            <td>
+                                @if(isset($lesson->file))
+                                    <a href="{{ route('teacher.lessons.view',[$course->id,$lesson->id]) }}">Hiển thị</a>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('teacher.exercises.index', [$course->id,$lesson->id]) }}"
+                                   class="btn btn-info">Chi tiết</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('teacher.lessons.show', [$course->id, $lesson->id]) }}"
+                                   class="btn btn-warning">
+                                    Sửa</a>
+                            </td>
+                            <td>
+                                <a href="{{ route('teacher.lessons.delete', [$course->id, $lesson->id]) }}"
+                                   class="btn btn-danger" onclick="return confirm('Xóa bài học này?')">
+                                    Xóa</a>
+                            </td>
+                        </tr>
                     @endforeach
-
                 </table>
             </div>
+                {{ $lessons->links('teacher::paginate.my_paginate') }}
         </div>
     </div>
-
+    <style>
+        .w-5 {
+            display: none;
+        }
+    </style>
 
 
 @endsection

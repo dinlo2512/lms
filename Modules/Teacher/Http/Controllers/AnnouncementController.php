@@ -28,7 +28,7 @@ class AnnouncementController extends Controller
     {
         $title = "Announcements";
         $course = Course::findOrFail($courseId);
-        $announcements = Announcement::query()->where('course_id', $course->id)->paginate(10);
+        $announcements = Announcement::query()->where('course_id', $course->id)->paginate(4);
         return view('teacher::announcements.index',compact('title','course','announcements'));
     }
 

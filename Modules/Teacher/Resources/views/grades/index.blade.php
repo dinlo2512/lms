@@ -17,7 +17,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.lessons.index', $course->id)}}">
+            <a href="{{route('teacher.lessons.index', $course->id)}}" class="actived">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -38,7 +38,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -85,6 +85,7 @@
                     </table>
                     <button class="btn btn-primary" style="float: right; margin-right:60px;" name="submit">
                         Lưu điểm</button>
+                    <a href="{{ route('teacher.exercises.index',[$course->id,$lesson->id]) }}">Trở về</a>
                 </div>
             </form>
         </div>

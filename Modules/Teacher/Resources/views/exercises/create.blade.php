@@ -15,7 +15,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('teacher.lessons.index', $course->id) }}">
+            <a href="{{ route('teacher.lessons.index', $course->id) }}" class="actived">
                 <i class="fas fa-home"></i>
                 <span class="links_name">Learning</span>
             </a>
@@ -36,7 +36,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -80,6 +80,7 @@
                     <input type="datetime-local" name="deadline" id="deadline" class="form-control" value="{{old('deadline')}}">
                     <br>
                     <button class="btn btn-primary" name="submit" > Lưu</button>
+                    <a href="{{ route('teacher.exercises.index',[$course->id,$lesson->id]) }}">Trở về</a>
                 </form>
             </div>
         </div>

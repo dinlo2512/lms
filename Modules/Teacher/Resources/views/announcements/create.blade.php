@@ -23,7 +23,7 @@
 
         </li>
         <li>
-            <a href="{{route('teacher.announcements.index',$course->id)}}">
+            <a href="{{route('teacher.announcements.index',$course->id)}}" class="actived">
                 <i class="fas fa-bullhorn"></i>
                 <span class="links_name">Announcements</span>
             </a>
@@ -37,7 +37,7 @@
 
         </li>
         <li>
-            <a href="">
+            <a href="{{ route('teacher.statistic.index', $course->id) }}">
                 <i class="fas fa-calendar"></i>
                 <span class="links_name">Statistic</span>
             </a>
@@ -78,6 +78,7 @@
                     <input type="text" name="title" id="title" class="form-control" value="{{old('title')}}">
                     <br>
                     <button class="btn btn-primary" name="submit" > Lưu</button>
+                    <a href="{{ route('teacher.announcements.index', $course->id) }}"> Trở về</a>
                 </form>
             </div>
         </div>

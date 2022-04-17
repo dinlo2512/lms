@@ -26,12 +26,22 @@ class StatisticController extends Controller
     {
         $title = "Statistic";
         $course = Course::findOrFail($courseId);
+        $course_date = Course::select('open_date', 'close_date')->where('id', $course->id)->first();
         $lessons = Lesson::query()->where('course_id', $courseId)->get();
-//        foreach($course->users as $user){
-//
+//        $date = Attendance::query()->select('day')->distinct()->get();
+//        dd($date);
+//        foreach($date as $val){
+//            $a = getdate(strtotime( $val->day));
+//            echo     $a['mday']."<br>";
+//            echo     $a['mon']."<br>";
 //        }
+        $diff = abs(strtotime($course_date->close_date) - strtotime($course_date->open_date));
+        $years = floor($diff / (365*60*60*24));
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+
+//        dd($months);
         return view('teacher::statistics.index',
-            compact('course','lessons','title'));
+            compact('course','lessons','title','course_date', 'months'));
     }
 
 }
