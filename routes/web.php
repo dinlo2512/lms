@@ -34,7 +34,7 @@ Route::prefix('/my')->name('my.')->group(function (){
     Route::get('/user-profile',[UserProfileController::class, 'index'])
         ->name('profile');
 
-    Route::get('/setting-profle', [UserSettingController::class, 'index'])
+    Route::get('/setting-profile', [UserSettingController::class, 'index'])
         ->name('setting-profile');
     Route::post('/setting-profle/{id?}/update', [UserSettingController::class, 'update'])
         ->name('setting-profile.update');

@@ -22,6 +22,7 @@
                     @endif
                 @endforeach
             </div>
+            <a href="{{ route('my.course',$course->id) }}" class="btn btn-info" style="margin: 10px 20px"><i class="fas fa-angle-double-left"></i> Trở về </a>
         </div>
     </div>
 

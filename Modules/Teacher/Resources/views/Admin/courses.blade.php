@@ -40,9 +40,12 @@
     <div class="content">
         <div class="main">
             <div class="table-responsive">
-                <a href="" class="btn btn-primary">
-                    Create Course
-                </a>
+                <h1 class="h1">Course Management</h1>
+                <div>
+                    <a href="" class="btn btn-primary">
+                        Create New Course
+                    </a>
+                </div>
                 <br>
                 <table class="table table-striped">
                     <tr>
@@ -56,22 +59,43 @@
                         <th colspan="2">Action</th>
                     </tr>
                     @foreach($courses as $course)
-                    <tr>
-                        <td>{{ $course->id }}</td>
-                        <td>{{ $course->name }}</td>
-                        <td>{{ $course->subject }}</td>
-                        <td>{{ $course->description }}</td>
-                        <td>{{ $course->teacher_name }}</td>
-                        <td>{{ date('d/m/Y', strtotime($course->open_date)) }}</td>
-                        <td>{{ date('d/m/Y', strtotime($course->close_date)) }}</td>
-                        <td><a href="" class="btn btn-warning">Sửa</a></td>
-                        <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete')">
-                                Xóa</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $course->id }}</td>
+                            <td>{{ $course->name }}</td>
+                            <td>{{ $course->subject }}</td>
+                            <td>{{ $course->description }}</td>
+                            <td>{{ $course->teacher_name }}</td>
+                            <td>{{ date('d/m/Y', strtotime($course->open_date)) }}</td>
+                            <td>{{ date('d/m/Y', strtotime($course->close_date)) }}</td>
+                            <td><a href="" class="btn btn-warning">Sửa</a></td>
+                            <td><a href="" class="btn btn-danger delete">
+                                    Xóa</a>
+                                <script>
+                                    $('.delete').click(function (e) {
+                                        e.preventDefault();
+                                        var self = $(this);
+                                        console.log(self.data('title'));
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "Không thể khôi phục nếu xóa",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Có, Xóa!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location.href = self.attr('href');
+                                            }
+                                        })
+                                    })
+                                </script>
+                            </td>
+                        </tr>
                     @endforeach
                 </table>
             </div>
+            {{ $courses->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}
         </div>
     </div>
 @endsection

@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="sidebar">
@@ -23,28 +24,31 @@
         <i class="fas fa-bars" id="btn"></i>
         <ul class="nav-list">
             <li>
-                <a href="{{ route('sitehome') }}">
+                <a href="{{ route('sitehome') }}" class="{{ 'site-home' == request()->path(route('sitehome')) ? "actived" : "" }}">
                     <i class="fas fa-home"></i>
                     <span class="links_name">Site Home</span>
                 </a>
                 {{--                <span class="tooltip">Site Home</span>--}}
             </li>
             <li>
-                <a href="{{ route('my.profile') }}">
+                <a href="{{ route('my.profile') }}" class="{{ 'my/user-profile' == request()->path(route('my.profile')) ? "actived" : "" }}">
                     <i class="fas fa-user"></i>
                     <span class="links_name">User</span>
                 </a>
                 {{--                <span class="tooltip">User</span>--}}
             </li>
             <li>
-                <a href="{{route('my.dashboard')}}">
+                <a href="{{route('my.dashboard')}}" class="{{'my' == request()->path(route('my.dashboard')) ? "actived" : "" }}
+                    ">
                     <i class="fas fa-th-large"></i>
                     <span class="links_name">Dashboard</span>
                 </a>
                 {{--                <span class="tooltip">Dashboard</span>--}}
             </li>
             <li>
-                <a href="{{ route('my.setting-profile') }}">
+                <a href="{{ route('my.setting-profile') }}" class="{{ 'my/setting-profile' == request()->path(route('my.setting-profile')) ? "actived" : "" }}
+                {{'my/setting-password' == request()->path(route('my.setting-password')) ? "actived" : "" }}
+                    ">
                     <i class="fas fa-cog"></i>
                     <span class="links_name">Setting</span>
                 </a>

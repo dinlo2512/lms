@@ -6,9 +6,10 @@
     <title>LNL- Learn And Learn</title>
     <link rel="stylesheet" type="text/css" href="{{URL('front-end/css/normalize.css')}}">
     <link rel="stylesheet" href="{{URL('front-end/css/fontawesome-5.web/css/all.min.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{URL('front-end/css/style.css')}}">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -260,11 +261,15 @@
             <div class="row">
                 <div class="logo-footer col-md-4">
                     <img src="{{URL('front-end/images/logo2.png')}}" alt="">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5344.308243517831!2d105.84248427658085!3d20.99993435016187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac71752d8f79%3A0xd2ec575c01017afa!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBLaW5oIFThur8gUXXhu5FjIETDom4!5e0!3m2!1svi!2s!4v1650333349737!5m2!1svi!2s"
+                        width="350" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="contact-us col-md-4">
                     <h3>contact us</h3>
-                    <p><i class="fas fa-phone-square-alt"></i> Phone: +999999999</p>
-                    <p><i class="fas fa-envelope"></i> Email:aaaa@gmail.com</p>
+                    <p><i class="fas fa-phone-square-alt"></i> Phone: +0389736466</p>
+                    <p><i class="fas fa-envelope"></i> Email:dinhlong251200@gmail.com</p>
                 </div>
                 <div class="icon col-md-4">
                     <h3>get social</h3>

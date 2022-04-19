@@ -36,9 +36,13 @@
                             </div>
                             <div class="col-md-8 mt-1">
                                 @if($message = Session::get('success'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ $message }}
-                                    </div>
+                                    <script>
+                                        Swal.fire({
+                                            title: '{{ $message }}',
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        })
+                                    </script>
                                 @endif
                                 <div class="card text-center">
                                     <div class="card-body">

@@ -1,4 +1,3 @@
-
 @extends('teacher::layouts.home')
 
 @section('nav-list')
@@ -11,7 +10,7 @@
 
         </li>
         <li>
-            <a href="{{ route('teacher.admin.allUser') }}" >
+            <a href="{{ route('teacher.admin.allUser') }}">
                 <i class="fas fa-user"></i>
                 <span class="links_name">User</span>
             </a>
@@ -40,10 +39,49 @@
     </div>
     <div class="content">
         <div class="main">
+            <h1 class="h1"> Teacher Management </h1>
             <div class="table-responsive">
-                <a href="" class="btn btn-primary">
-                    Create User
-                </a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="" class="btn btn-primary">
+                            Create New Teacher
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-control" name="select">
+                                        <option value="0">
+                                            --Select--
+                                        </option>
+                                        <option value="1">
+                                            Username
+                                        </option>
+                                        <option value="2">
+                                            Email
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" class="form-control" style="display: inline; width:80%"
+                                           placeholder="Search...">
+                                    <button class="btn btn-secondary" > Search</button>
+                                    @if(isset($_GET['name']))
+                                    <a href="{{ route('teacher.admin.allTeacher') }}" style="float: right; margin-right: 33px;margin-top:10px">
+                                        clear filter
+                                        <i class="fas fa-filter"></i>
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+
                 <br>
                 <table class="table table-striped">
                     <tr>
@@ -65,13 +103,34 @@
                             <td>{{ $teacher->email }}</td>
                             <td>{{ $teacher->phone_number }}</td>
                             <td>{{ $teacher->address }}</td>
-                            <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete')">
+                            <td><a href="" class="btn btn-danger delete">
                                     Xóa</a>
+                                <script>
+                                    $('.delete').click(function (e) {
+                                        e.preventDefault();
+                                        var self = $(this);
+                                        console.log(self.data('title'));
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "Không thể khôi phục nếu xóa",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Có, Xóa!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location.href = self.attr('href');
+                                            }
+                                        })
+                                    })
+                                </script>
                             </td>
                         </tr>
                     @endforeach
                 </table>
             </div>
+            {{ $teachers->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}
         </div>
     </div>
 @endsection

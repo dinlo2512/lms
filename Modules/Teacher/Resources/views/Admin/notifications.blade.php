@@ -60,8 +60,28 @@
                             <td>{{ $noti->title }}</td>
                             <td>{{ date('d/m/Y', strtotime($noti->created_at)) }}</td>
                             <td>{{ date('d/m/Y', strtotime($noti->updated_at)) }}</td>
-                            <td><a href="" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete')">
+                            <td><a href="" class="btn btn-danger delete">
                                     Xóa</a>
+                                <script>
+                                    $('.delete').click(function (e){
+                                        e.preventDefault();
+                                        var self = $(this);
+                                        console.log(self. data('title'));
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "Không thể khôi phục nếu xóa",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Có, Xóa!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location.href = self.attr('href');
+                                            }
+                                        })
+                                    })
+                                </script>
                             </td>
                         </tr>
                     @endforeach

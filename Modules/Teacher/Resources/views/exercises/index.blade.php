@@ -56,9 +56,13 @@
         <div class="main">
             <h1 class="h1"><u> Bài học: {{ $lesson->content }} </u></h1>
             @if($message = Session::get('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ $message }}
-                </div>
+                <script>
+                    Swal.fire({
+                        title: '{{ $message }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                </script>
             @endif
             <a href="{{route('teacher.exercises.create', [$course->id,$lesson->id])}}" class="btn btn-primary">Thêm bài
                 tập</a>
@@ -102,9 +106,29 @@
                             </td>
                             <td>
                                 <a href="{{ route('teacher.exercises.delete', [$course->id,$lesson->id,$exercise->id]) }}"
-                                   class="btn btn-outline-danger" onclick="return confirm('Xóa bài tập này?')">
+                                   class="btn btn-outline-danger delete">
                                     Xóa
                                 </a>
+                                <script>
+                                    $('.delete').click(function (e){
+                                        e.preventDefault();
+                                        var self = $(this);
+                                        console.log(self. data('title'));
+                                        Swal.fire({
+                                            title: 'Are you sure?',
+                                            text: "Không thể khôi phục nếu xóa",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#4CCF6C',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Có, Xóa!'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location.href = self.attr('href');
+                                            }
+                                        })
+                                    })
+                                </script>
                             </td>
                         </tr>
                     @endforeach

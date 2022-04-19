@@ -45,7 +45,7 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
     Route::post('/setting/password/{id?}', [TeacherController::class, 'updatePassword'])
         ->name('setting.password');
 
-
+//Lesson
     Route::get('courses/{courseId?}/lessons', [LessonController::class, 'index'])
         ->name('lessons.index');
     Route::get('courses/{courseId?}/lessons/create', [LessonController::class, 'create'])
@@ -60,12 +60,12 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('lessons.delete');
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/view', [LessonController::class, 'view'])
         ->name('lessons.view');
-
+//Course
     Route::post('/courses/{courseId?}/attendance', [CourseController::class, 'attendanceStore'])
         ->name('course.attendance');
     Route::post('/courses/{courseId?}/attendance/update', [CourseController::class, 'attendanceUpdate'])
         ->name('course.attendance.update');
-
+//Exercies
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises', [ExerciesController::class, 'index'])
         ->name('exercises.index');
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/create', [ExerciesController::class, 'create'])
@@ -80,14 +80,14 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('exercises.delete');
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId}/give', [ExerciesController::class, 'give'])
         ->name('exercises.give');
-
+//Grades
     Route::get('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}', [GradesController::class, 'index'])
         ->name('grades.index');
     Route::get('/exercises/{id?}', [GradesController::class, 'show'])
         ->name('grades.view');
     Route::post('/courses/{courseId?}/lessons/{lessonId?}/exercises/{exerciseId?}/update', [GradesController::class, 'update'])
         ->name('grades.update');
-
+//Announcement
     Route::get('/courses/{courseId?}/announcements',[AnnouncementController::class, 'index'])
     ->name('announcements.index');
     Route::get('/courses/{courseId?}/announcements/create',[AnnouncementController::class, 'create'])
@@ -96,10 +96,10 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('announcements.store');
     Route::get('/courses/{courseId?}/announcements/{announcementId?}/delete',[AnnouncementController::class, 'destroy'])
         ->name('announcements.delete');
-
+//Statistic
     Route::get('/courses/{courseId?}/statistic', [StatisticController::class, 'index'])
         ->name('statistic.index');
-
+//Admin
     Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin.index');
     Route::get('/admin/courses', [AdminController::class, 'allCourse'])

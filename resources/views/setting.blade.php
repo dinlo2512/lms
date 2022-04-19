@@ -20,9 +20,13 @@
                     </div>
                     <div class="col-md-8 mt-1">
                         @if($message = Session::get('success'))
-                            <div class="alert alert-success" role="alert">
-                                {{ $message }}
-                            </div>
+                            <script>
+                                Swal.fire({
+                                    title: '{{ $message }}',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                })
+                            </script>
                         @endif
                         <div class="card text-center">
                             <div class="card-body">
@@ -97,7 +101,7 @@
                                             <p class="error">{{$error}}</p>
                                         @endforeach
                                         @enderror
-                                        <input class="form-control" name="date_of_birth" type="text" value="{{ Auth::user()->date_of_birth }}">
+                                        <input class="form-control" name="date_of_birth" type="text" value="{{ date('d-m-Y', strtotime(Auth::user()->date_of_birth)) }}">
                                     </div>
                                 </div>
                                 <hr>

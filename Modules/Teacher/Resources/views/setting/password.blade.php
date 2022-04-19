@@ -34,14 +34,22 @@
                         </div>
                         <div class="col-md-8 mt-1 form-group form">
                             @if($message = Session::get('error'))
-                                <div class="alert alert-danger" role="alert">
-                                   {{ $message }}
-                                </div>
+                                <script>
+                                    Swal.fire({
+                                        title: '{{ $message }}',
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                    })
+                                </script>
                             @endif
                                 @if($message = Session::get('success'))
-                                    <div class="alert alert-success" role="alert">
-                                        {{ $message }}
-                                    </div>
+                                    <script>
+                                        Swal.fire({
+                                            title: '{{ $message }}',
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        })
+                                    </script>
                                 @endif
                             <form action="{{ route('teacher.setting.password',Auth::guard('teacher')->user()->id) }}"
                                   method="post">

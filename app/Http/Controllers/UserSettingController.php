@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserPasswordRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
 use App\Models\Course;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,7 +106,7 @@ class UserSettingController extends Controller
             return redirect(route('my.setting-profile'))
                 ->with('success','Cập nhật thành công');
         }else{
-            Teacher::query()->where('id',$id)->update([
+            User::query()->where('id',$id)->update([
                 'name' => $request->get('name'),
                 'phone_number' => $request->get('phone_number'),
                 'address' => $request->get('address'),

@@ -57,9 +57,13 @@
         <div class="main">
             <h1 class="h1"><u>Tất cả thông báo của lớp</u></h1>
             @if($message = Session::get('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ $message }}
-                </div>
+                <script>
+                    Swal.fire({
+                        title: '{{ $message }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                </script>
             @endif
             <a href="{{route('teacher.announcements.create', $course->id)}}" class="btn btn-primary">Tạo Thông báo</a>
             <div class="table-responsive ">
@@ -79,9 +83,29 @@
                         <td>{{ date('d/m/Y',strtotime($announcement->created_at)) }}</td>
                         <td>
                             <a href="{{ route('teacher.announcements.delete', [$course->id, $announcement->id]) }}"
-                               class="btn btn-danger" onclick="return confirm('Xóa thông báo này?')">
+                               class="btn btn-danger delete">
                                 Xóa
                             </a>
+                            <script>
+                                $('.delete').click(function (e){
+                                    e.preventDefault();
+                                    var self = $(this);
+                                    console.log(self. data('title'));
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "Không thể khôi phục nếu xóa",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#4CCF6C',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Có, Xóa!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.href = self.attr('href');
+                                        }
+                                    })
+                                })
+                            </script>
                         </td>
                     </tr>
                     @endforeach

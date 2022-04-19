@@ -58,9 +58,13 @@
             <form action="{{ route('teacher.grades.update', [$course->id,$lesson->id,$exercises->id]) }}" method="post">
                 @csrf
                 @if($message = Session::get('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ $message }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            title: '{{ $message }}',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        })
+                    </script>
                 @endif
                 <div class="table-responsive ">
                     <table class="table table-bordered">

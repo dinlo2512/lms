@@ -96,7 +96,7 @@ class AdminController extends Controller
         $courses = Course::query()
             ->select('courses.id','courses.name','courses.subject','courses.description','courses.status','courses.open_date','courses.close_date','teachers.name as teacher_name')
             ->join('teachers', 'teachers.id', '=', 'courses.teacher_id')
-            ->get();
+            ->paginate(5);
 
         return view('teacher::Admin.courses', compact('title', 'courses'));
     }
@@ -104,15 +104,44 @@ class AdminController extends Controller
     public function allUser()
     {
         $title = "All User";
-        $users = User::all();
+        if (request()->get('select') == 1){
+            $name = request()->get('name');
+            $users = User::where('username', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        elseif (request()->get('select') == 2){
+            $name = request()->get('name');
+            $users = User::where('email', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        elseif (request()->get('select') == 0){
+            $name = request()->get('name');
+            $users = User::where('name', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        else{
+            $users = User::paginate(8);
+        }
 
         return view('teacher::Admin.users', compact('title', 'users'));
     }
 
-    public function allTeacher()
+    public function allTeacher(Request $request)
     {
         $title = "All Teacher";
-        $teachers = Teacher::all();
+
+        if (request()->get('select') == 1){
+            $name = request()->get('name');
+            $teachers = Teacher::where('username', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        elseif (request()->get('select') == 2){
+            $name = request()->get('name');
+            $teachers = Teacher::where('email', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        elseif (request()->get('select') == 0){
+            $name = request()->get('name');
+            $teachers = Teacher::where('name', 'LIKE','%'.$name.'%')->paginate(8);
+        }
+        else{
+            $teachers = Teacher::paginate(8);
+        }
 
         return view('teacher::Admin.teachers', compact('title', 'teachers'));
     }
