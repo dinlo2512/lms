@@ -23,6 +23,7 @@ class CreateTeachersTable extends Migration
             $table->string('phone_number', 11)->unique();
             $table->string('address', 1000)->nullable();
             $table->string('avatar')->nullable();
+            $table->integer('role_id')->nullable();
             $table->timestamps();
         });
     }

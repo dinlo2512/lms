@@ -29,6 +29,12 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('teacher.admin.roles') }}">
+                <i class="fas fa-dice-d6"></i>
+                <span class="links_name">Roles</span>
+            </a>
+        </li>
     </ul>
 @endsection
 
@@ -94,6 +100,7 @@
                         <th>Address</th>
                         <th>Action</th>
                     </tr>
+                    <tbody>
                     @foreach($teachers as $teacher)
                         <tr>
                             <td>{{ $teacher->id }}</td>
@@ -128,6 +135,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
             {{ $teachers->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}

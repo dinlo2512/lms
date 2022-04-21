@@ -48,12 +48,12 @@
 @section('content')
 
     <div class="content-top">
-        <h3>Create Exercises</h3>
+        <h3>Update Exercises</h3>
         <p>Dashboard/{{ $course->name }}/Lessons</p>
     </div>
     <div class="content">
         <div class="main">
-            <h3 style="padding-left: 20px; padding-top: 20px; ">Tạo bài học</h3>
+            <h3 style="padding-left: 20px; padding-top: 20px; ">Sửa bài học</h3>
             <div class="form-group form" >
                 <form action="{{ route('teacher.lessons.update', [$course->id, $lesson->id]) }}" method="post" enctype="multipart/form-data">
                     @csrf

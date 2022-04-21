@@ -23,7 +23,8 @@ class Teacher extends Authenticatable
         'avatar',
         'email',
         'phone_number',
-        'password'
+        'password',
+        'role_id',
     ];
 
     /**

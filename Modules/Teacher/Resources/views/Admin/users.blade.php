@@ -29,6 +29,12 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('teacher.admin.roles') }}">
+                <i class="fas fa-dice-d6"></i>
+                <span class="links_name">Roles</span>
+            </a>
+        </li>
     </ul>
 @endsection
 
@@ -39,49 +45,58 @@
     </div>
     <div class="content">
         <div class="main">
+            <h1 class="h1"> User Management </h1>
             <div class="table-responsive">
-                <h1 class="h1"> User Management </h1>
-                <div class="table-responsive">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="" class="btn btn-primary">
-                                Create New User
-                            </a>
-                        </div>
-
-                        <div class="col-md-8">
-                            <form action="" method="get">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <select class="form-control" name="select">
-                                            <option value="0">
-                                                --Select--
-                                            </option>
-                                            <option value="1">
-                                                Username
-                                            </option>
-                                            <option value="2">
-                                                Email
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="name" class="form-control" style="display: inline; width:80%"
-                                               placeholder="Search...">
-                                        <button class="btn btn-secondary" > Search</button>
-                                        @if(isset($_GET['name']))
-                                            <a href="{{ route('teacher.admin.allUser') }}" style="float: right; margin-right: 33px;margin-top:10px">
-                                                clear filter
-                                                <i class="fas fa-filter"></i>
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
+                @if($message = Session::get('success'))
+                    <script>
+                        Swal.fire({
+                            title: '{{ $message }}',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        })
+                    </script>
+                @endif
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{{ route('teacher.admin.createUser') }}" class="btn btn-primary">
+                            Create New User
+                        </a>
                     </div>
+                    <div class="col-md-8">
+                        <form action="" method="get">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-control" name="select">
+                                        <option value="0">
+                                            --Select--
+                                        </option>
+                                        <option value="1">
+                                            Username
+                                        </option>
+                                        <option value="2">
+                                            Email
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="name" class="form-control"
+                                           style="display: inline; width:80%"
+                                           placeholder="Search...">
+                                    <button class="btn btn-secondary"> Search</button>
+                                    @if(isset($_GET['name']))
+                                        <a href="{{ route('teacher.admin.allUser') }}"
+                                           style="float: right; margin-right: 33px;margin-top:10px">
+                                            clear filter
+                                            <i class="fas fa-filter"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
                 <br>
                 <table class="table table-striped">
                     <tr>
@@ -94,6 +109,7 @@
                         <th>Address</th>
                         <th>Action</th>
                     </tr>
+                    <tbody>
                     @foreach($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
@@ -106,10 +122,10 @@
                             <td><a href="" class="btn btn-danger delete">
                                     Xóa</a>
                                 <script>
-                                    $('.delete').click(function (e){
+                                    $('.delete').click(function (e) {
                                         e.preventDefault();
                                         var self = $(this);
-                                        console.log(self. data('title'));
+                                        console.log(self.data('title'));
                                         Swal.fire({
                                             title: 'Are you sure?',
                                             text: "Không thể khôi phục nếu xóa",
@@ -128,9 +144,9 @@
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
-                {{ $users->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}
+            {{ $users->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}
         </div>
-    </div>
 @endsection

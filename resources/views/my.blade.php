@@ -101,8 +101,8 @@
                     </div>
                     <div class="contact-us col-md-4">
                         <h3>contact us</h3>
-                        <p><i class="fas fa-phone-square-alt"></i> Phone: +999999999</p>
-                        <p><i class="fas fa-envelope"></i> Email:aaaa@gmail.com</p>
+                        <p><i class="fas fa-phone-square-alt"></i> Phone: +0389736466</p>
+                        <p><i class="fas fa-envelope"></i> Email:dinhlong251200@gmail.com</p>
                     </div>
                     <div class="icon col-md-4">
                         <h3>get social</h3>

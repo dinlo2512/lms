@@ -110,6 +110,20 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.allTeacher');
     Route::get('/admin/notification', [AdminController::class, 'allNotification'])
         ->name('admin.allNotification');
+    Route::get('/admin/roles', [AdminController::class, 'role'])
+        ->name('admin.roles');
+    Route::post('/admin/roles', [AdminController::class, 'saveRole'])
+        ->name('admin.saveRole');
+//Admin Course
+    Route::get('/admin/courses/create', [AdminController::class, 'createCourse'])
+        ->name('admin.createCourse');
+    Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])
+        ->name('admin.storeCourse');
+//Admin User
+    Route::get('/admin/user/create', [AdminController::class, 'createUser'])
+        ->name('admin.createUser');
+    Route::post('/admin/user/store', [AdminController::class, 'storeUser'])
+        ->name('admin.storeUser');
 });
 
 

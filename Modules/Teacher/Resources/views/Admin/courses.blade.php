@@ -29,6 +29,12 @@
             </a>
 
         </li>
+        <li>
+            <a href="{{ route('teacher.admin.roles') }}">
+                <i class="fas fa-dice-d6"></i>
+                <span class="links_name">Roles</span>
+            </a>
+        </li>
     </ul>
 @endsection
 
@@ -39,10 +45,19 @@
     </div>
     <div class="content">
         <div class="main">
+            @if($message = Session::get('success'))
+                <script>
+                    Swal.fire({
+                        title: '{{ $message }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                </script>
+            @endif
             <div class="table-responsive">
                 <h1 class="h1">Course Management</h1>
                 <div>
-                    <a href="" class="btn btn-primary">
+                    <a href="{{ route('teacher.admin.createCourse') }}" class="btn btn-primary">
                         Create New Course
                     </a>
                 </div>
@@ -53,11 +68,12 @@
                         <th>Name</th>
                         <th>Subject</th>
                         <th>Description</th>
-                        <td>Teacher</td>
+                        <th>Teacher</th>
                         <th>Open_date</th>
                         <th>Close_date</th>
                         <th colspan="2">Action</th>
                     </tr>
+                    <tbody>
                     @foreach($courses as $course)
                         <tr>
                             <td>{{ $course->id }}</td>
@@ -93,6 +109,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
             {{ $courses->appends(request()->only('select','name'))->links('teacher::paginate.my_paginate') }}

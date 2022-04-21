@@ -27,7 +27,12 @@
                 <i class="fas fa-bell"></i>
                 <span class="links_name">Notifications</span>
             </a>
-
+        </li>
+        <li>
+            <a href="{{ route('teacher.admin.roles') }}">
+                <i class="fas fa-dice-d6"></i>
+                <span class="links_name">Roles</span>
+            </a>
         </li>
     </ul>
 @endsection
