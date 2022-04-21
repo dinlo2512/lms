@@ -14,11 +14,24 @@
         </div>
         <div class="text-lg-start card-body">
             <h3 class="text-primary"> &rArr; Thông báo chung:</h3>
-            <h5 style="padding-left: 30px">&#9658; abcdefu</h5>
+            @foreach($notifications as $noti)
+                <p>{{ $noti->title }}</p>
+            <h5 style="padding-left: 30px">&#9658; {{ $noti->content }}</h5>
+            @endforeach
         </div>
         <div style="margin-top:5px" class="text-lg-start card-body">
             <h3 class="text-info"> &rArr; Thông báo lớp:</h3>
-            <h5 style="padding-left: 30px">&#9658; abcdefu</h5>
+            @foreach($courses as $course)
+                @php
+                $announcements = \App\Models\Announcement::query()->where('course_id',$course->course_id)
+                ->orderByDesc('created_at')
+                ->get();
+                @endphp
+            @foreach($announcements as $value)
+                <p>{{ $value->title }}</p>
+            <h5 style="padding-left: 30px">&#9658; {{ $value->content }}</h5>
+            @endforeach
+            @endforeach
         </div>
 
     </div>

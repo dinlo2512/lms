@@ -107,7 +107,7 @@
                         <th>Email</th>
                         <th>Phone_number</th>
                         <th>Address</th>
-                        <th>Action</th>
+                        <th colspan="2" >Action</th>
                     </tr>
                     <tbody>
                     @foreach($users as $user)
@@ -119,7 +119,28 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone_number }}</td>
                             <td>{{ $user->address }}</td>
-                            <td><a href="" class="btn btn-danger delete">
+                            <td><a href="" class="reset-password" >Reset Password</a></td>
+                            <script>
+                                $('.reset-password').click(function (e) {
+                                    e.preventDefault();
+                                    var self = $(this);
+                                    console.log(self.data('title'));
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "Thay đổi mật khẩu về mặc định?",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Có, Thay đổi!'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.href = self.attr('href');
+                                        }
+                                    })
+                                })
+                              </script>
+                            <td><a href="{{ route('teacher.admin.deleteUser', $user->id) }}" class="btn btn-danger delete">
                                     Xóa</a>
                                 <script>
                                     $('.delete').click(function (e) {

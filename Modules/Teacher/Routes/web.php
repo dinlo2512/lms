@@ -124,6 +124,8 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.createUser');
     Route::post('/admin/user/store', [AdminController::class, 'storeUser'])
         ->name('admin.storeUser');
+    Route::get('/admin/user/delete/{id?}', [AdminController::class, 'deleteUser'])
+        ->name('admin.deleteUser');
 });
 
 

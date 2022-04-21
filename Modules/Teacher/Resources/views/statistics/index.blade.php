@@ -193,6 +193,149 @@
                     <li style="opacity:0.25">1</li>
                 </ul>
             </div>
+            <br><br>
+            <div class="form-group">
+                <form class="form-control form">
+                    <h2> Danh sách thi học viên</h2>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th style="width:10%">Mã học viên</th>
+                            <th>Họ tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Điều kiện</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($course->users as $user)
+                            @php
+                                $absent = \App\Models\Attendance::query()->where('user_id', $user->id)
+                                              ->where('status', '=', '-1')
+                                              ->where('course_id', $course->id)
+                                              ->count();
+
+                            @endphp
+                        <tr>
+                            <td>{{ $loop->index+1 }}</td>
+                            <td>MHV{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ date('d/m/Y', strtotime($user->date_of_birth)) }}</td>
+                            @if($absent >= 5)
+                            <td>Không đủ điều kiện thi</td>
+                            @else
+                            <td>Đủ điều kiện thi</td>
+                            @endif
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </form>
+                <input type="button" id="create_pdf" value="Xuất file PDF" class="btn btn-danger">
+                <script>
+                    (function () {
+                        var
+                            form = $('.form'),
+                            cache_width = form.width(),
+                            a4 = [595.28, 841.89]; // for a4 size paper width and height
+
+                        $('#create_pdf').on('click', function () {
+                            $('body').scrollTop(0);
+                            createPDF();
+                        });
+                        //create pdf
+                        function createPDF() {
+                            getCanvas().then(function (canvas) {
+                                var
+                                    img = canvas.toDataURL("image/png"),
+                                    doc = new jsPDF({
+                                        unit: 'px',
+                                        format: 'a4'
+                                    });
+                                doc.addImage(img, 'JPEG', 20, 20);
+                                doc.save('Bhavdip-html-to-pdf.pdf');
+                                form.width(cache_width);
+                            });
+                        }
+
+                        // create canvas object
+                        function getCanvas() {
+                            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+                            return html2canvas(form, {
+                                imageTimeout: 2000,
+                                removeContainer: true
+                            });
+                        }
+
+                    }());
+                </script>
+                <script>
+                    /*
+                 * jQuery helper plugin for examples and tests
+                 */
+                    (function ($) {
+                        $.fn.html2canvas = function (options) {
+                            var date = new Date(),
+                                $message = null,
+                                timeoutTimer = false,
+                                timer = date.getTime();
+                            html2canvas.logging = options && options.logging;
+                            html2canvas.Preload(this[0], $.extend({
+                                complete: function (images) {
+                                    var queue = html2canvas.Parse(this[0], images, options),
+                                        $canvas = $(html2canvas.Renderer(queue, options)),
+                                        finishTime = new Date();
+
+                                    $canvas.css({ position: 'absolute', left: 0, top: 0 }).appendTo(document.body);
+                                    $canvas.siblings().toggle();
+
+                                    $(window).click(function () {
+                                        if (!$canvas.is(':visible')) {
+                                            $canvas.toggle().siblings().toggle();
+                                            throwMessage("Canvas Render visible");
+                                        } else {
+                                            $canvas.siblings().toggle();
+                                            $canvas.toggle();
+                                            throwMessage("Canvas Render hidden");
+                                        }
+                                    });
+                                    throwMessage('Screenshot created in ' + ((finishTime.getTime() - timer) / 1000) + " seconds<br />", 4000);
+                                }
+                            }, options));
+
+                            function throwMessage(msg, duration) {
+                                window.clearTimeout(timeoutTimer);
+                                timeoutTimer = window.setTimeout(function () {
+                                    $message.fadeOut(function () {
+                                        $message.remove();
+                                    });
+                                }, duration || 2000);
+                                if ($message)
+                                    $message.remove();
+                                $message = $('<div ></div>').html(msg).css({
+                                    margin: 0,
+                                    padding: 10,
+                                    background: "#000",
+                                    opacity: 0.7,
+                                    position: "fixed",
+                                    top: 10,
+                                    right: 10,
+                                    fontFamily: 'Tahoma',
+                                    color: '#fff',
+                                    fontSize: 12,
+                                    borderRadius: 12,
+                                    width: 'auto',
+                                    height: 'auto',
+                                    textAlign: 'center',
+                                    textDecoration: 'none'
+                                }).hide().fadeIn().appendTo('body');
+                            }
+                        };
+                    })(jQuery);
+
+                </script>
+            </div>
         </div>
     </div>
 

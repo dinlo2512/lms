@@ -62,10 +62,12 @@ class AdminController extends Controller
            'teacher_id' => $request->get('teacher'),
         ]);
 
-        return redirect(route('teacher.admin.allCourse'))->with('success', 'Successfully!!');
+        return redirect(route('teacher.admin.allCourse'))->with('success', 'Thành công!!');
     }
 
-
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function allCourse()
     {
         $title = "All Courses";
@@ -78,6 +80,9 @@ class AdminController extends Controller
         return view('teacher::Admin.courses', compact('title', 'courses'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function allUser()
     {
         $title = "All User";
@@ -173,7 +178,16 @@ class AdminController extends Controller
 
         ]);
 
-        return redirect(route('teacher.admin.allUser'))->with('success', 'Successfully!!');
+        return redirect(route('teacher.admin.allUser'))->with('success', 'Thành công!!');
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::FindOrFail($id);
+        $user->delete();
+
+        return redirect(route('teacher.admin.allUser'))->with('success', 'Thành công!!');
+
     }
 }
 
