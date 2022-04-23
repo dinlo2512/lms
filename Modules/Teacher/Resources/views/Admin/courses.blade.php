@@ -71,10 +71,17 @@
                         <th>Teacher</th>
                         <th>Open_date</th>
                         <th>Close_date</th>
+                        <th>Students</th>
                         <th colspan="2">Action</th>
                     </tr>
                     <tbody>
                     @foreach($courses as $course)
+                        @php
+                        $user = \App\Models\Course::query()
+                        ->join('course_user', 'course_user.course_id', '=', 'courses.id')
+                        ->where('course_user.course_id', $course->id)
+                        ->count('user_id');
+                        @endphp
                         <tr>
                             <td>{{ $course->id }}</td>
                             <td>{{ $course->name }}</td>
@@ -83,9 +90,10 @@
                             <td>{{ $course->teacher_name }}</td>
                             <td>{{ date('d/m/Y', strtotime($course->open_date)) }}</td>
                             <td>{{ date('d/m/Y', strtotime($course->close_date)) }}</td>
-                            <td><a href="" class="btn btn-warning">Sửa</a></td>
-                            <td><a href="" class="btn btn-danger delete">
-                                    Xóa</a>
+                            <td>{{ $user }}</td>
+                            <td><a href="{{ route('teacher.admin.editCourse', $course->id) }}" class="btn btn-warning">Edit</a></td>
+                            <td><a href="{{ route('teacher.admin.deleteCourse', $course->id) }}" class="btn btn-danger delete">
+                                    Delete</a>
                                 <script>
                                     $('.delete').click(function (e) {
                                         e.preventDefault();
@@ -93,12 +101,12 @@
                                         console.log(self.data('title'));
                                         Swal.fire({
                                             title: 'Are you sure?',
-                                            text: "Không thể khôi phục nếu xóa",
+                                            text: "You won't be able to revert this!",
                                             icon: 'warning',
                                             showCancelButton: true,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có, Xóa!'
+                                            confirmButtonText: 'Yes, delete it!'
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 location.href = self.attr('href');

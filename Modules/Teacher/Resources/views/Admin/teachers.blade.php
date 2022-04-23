@@ -41,7 +41,7 @@
 @section('content')
     <div class="content-top">
         <h3>Welcome </h3>
-        <p>Users</p>
+        <p>Teachers</p>
     </div>
     <div class="content">
         <div class="main">
@@ -49,7 +49,7 @@
             <div class="table-responsive">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="" class="btn btn-primary">
+                        <a href="{{ route('teacher.admin.createTeacher') }}" class="btn btn-primary">
                             Create New Teacher
                         </a>
                     </div>
@@ -110,8 +110,8 @@
                             <td>{{ $teacher->email }}</td>
                             <td>{{ $teacher->phone_number }}</td>
                             <td>{{ $teacher->address }}</td>
-                            <td><a href="" class="btn btn-danger delete">
-                                    Xóa</a>
+                            <td><a href="{{ route('teacher.admin.deleteTeacher', $teacher->id) }}" class="btn btn-danger delete">
+                                    Delete</a>
                                 <script>
                                     $('.delete').click(function (e) {
                                         e.preventDefault();
@@ -119,12 +119,12 @@
                                         console.log(self.data('title'));
                                         Swal.fire({
                                             title: 'Are you sure?',
-                                            text: "Không thể khôi phục nếu xóa",
+                                            text: "You won't be able to revert this!",
                                             icon: 'warning',
                                             showCancelButton: true,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có, Xóa!'
+                                            confirmButtonText: 'Yes, delete it!'
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 location.href = self.attr('href');

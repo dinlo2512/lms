@@ -21,6 +21,7 @@ class CoursesRequest extends FormRequest
             'open_date' => 'required|before:close_date',
             'close_date'=> 'required',
             'teacher' => 'required',
+            'user' => 'required',
         ];
     }
 
@@ -28,6 +29,7 @@ class CoursesRequest extends FormRequest
     {
         return [
             'teacher.required' => 'Must pick one Teacher',
+            'user.required' => 'Add at least one student',
         ];
     }
 

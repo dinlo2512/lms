@@ -102,7 +102,31 @@
                     @endforeach
                 </select>
                 <br>
+                @error('user')
+                <p class="error">{{ $message }}</p>
+                @enderror
+                <table class="table table-striped">
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>MHV{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ date('d/m/Y', strtotime($user->date_of_birth)) }}</td>
+                            <td><input type="checkbox" name="user[]" value="{{ $user->id }}"
+                                    {{ (is_array(old('user')) and in_array($user->id, old('user'))) ? ' checked' : '' }}
+                                > </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
                 <button class="btn btn-success" name="submit">Add</button>
+                <a href="{{ route('teacher.admin.allCourse') }}"> Back</a>
             </form>
             </div>
         </div>

@@ -119,6 +119,11 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.createCourse');
     Route::post('/admin/courses/store', [AdminController::class, 'storeCourse'])
         ->name('admin.storeCourse');
+    Route::get('/admin/courses/edit/{id?}', [AdminController::class, 'editCourse'])
+        ->name('admin.editCourse');
+    Route::get('/admin/courses/delete/{id?}', [AdminController::class, 'deleteCourse'])
+        ->name('admin.deleteCourse');
+
 //Admin User
     Route::get('/admin/user/create', [AdminController::class, 'createUser'])
         ->name('admin.createUser');
@@ -126,6 +131,22 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.storeUser');
     Route::get('/admin/user/delete/{id?}', [AdminController::class, 'deleteUser'])
         ->name('admin.deleteUser');
+    Route::get('/admin/user/reset-password/{id?}', [AdminController::class, 'passwordUser'])
+        ->name('admin.passwordUser');
+
+//Admin Teacher
+    Route::get('/admin/teacher/create', [AdminController::class, 'createTeacher'])
+        ->name('admin.createTeacher');
+    Route::post('/admin/teacher/store', [AdminController::class, 'storeTeacher'])
+        ->name('admin.storeTeacher');
+    Route::get('/admin/teacher/delete/{id?}', [AdminController::class, 'deleteTeacher'])
+        ->name('admin.deleteTeacher');
+
+//Admin Notification
+    Route::get('/admin/notification/create', [AdminController::class, 'createNotification'])
+        ->name('admin.createNotification');
+    Route::post('/admin/notification/store', [AdminController::class, 'storeNotification'])
+        ->name('admin.storeNotification');
 });
 
 

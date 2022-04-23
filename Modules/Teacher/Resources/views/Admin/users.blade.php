@@ -52,7 +52,7 @@
                         Swal.fire({
                             title: '{{ $message }}',
                             icon: 'success',
-                            confirmButtonText: 'OK'
+                            confirmButtonText: 'OK',
                         })
                     </script>
                 @endif
@@ -119,7 +119,7 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone_number }}</td>
                             <td>{{ $user->address }}</td>
-                            <td><a href="" class="reset-password" >Reset Password</a></td>
+                            <td><a href="{{ route('teacher.admin.passwordUser', $user->id) }}" class="reset-password" >Reset Password</a></td>
                             <script>
                                 $('.reset-password').click(function (e) {
                                     e.preventDefault();
@@ -127,12 +127,12 @@
                                     console.log(self.data('title'));
                                     Swal.fire({
                                         title: 'Are you sure?',
-                                        text: "Thay đổi mật khẩu về mặc định?",
+                                        text: "Change the password to default?",
                                         icon: 'warning',
                                         showCancelButton: true,
                                         confirmButtonColor: '#3085d6',
                                         cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Có, Thay đổi!'
+                                        confirmButtonText: 'Yes, delete it!'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             location.href = self.attr('href');
@@ -141,7 +141,7 @@
                                 })
                               </script>
                             <td><a href="{{ route('teacher.admin.deleteUser', $user->id) }}" class="btn btn-danger delete">
-                                    Xóa</a>
+                                    Delete</a>
                                 <script>
                                     $('.delete').click(function (e) {
                                         e.preventDefault();
@@ -149,12 +149,12 @@
                                         console.log(self.data('title'));
                                         Swal.fire({
                                             title: 'Are you sure?',
-                                            text: "Không thể khôi phục nếu xóa",
+                                            text: "You won't be able to revert this!",
                                             icon: 'warning',
                                             showCancelButton: true,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có, Xóa!'
+                                            confirmButtonText: 'Yes, delete it!'
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 location.href = self.attr('href');

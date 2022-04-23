@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Teacher\Http\Requests\CoursesRequest;
+use Modules\Teacher\Http\Requests\TeacherRequest;
 use Modules\Teacher\Http\Requests\UserRequest;
 
 class AdminController extends Controller
@@ -43,8 +44,11 @@ class AdminController extends Controller
     {
         $title = "Create Course";
         $teachers = Teacher::where('role_id', 1)->get();
-        return view('teacher::Admin.createCourse', compact('title', 'teachers'));
+        $users = User::all();
+
+        return view('teacher::Admin.createCourse', compact('title', 'teachers','users'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -53,7 +57,7 @@ class AdminController extends Controller
      */
     public function storeCourse(CoursesRequest $request)
     {
-        Course::query()->create([
+         $course = Course::query()->create([
            'name' => $request->get('name'),
            'subject' => $request->get('subject'),
            'description' => $request->get('description'),
@@ -61,8 +65,22 @@ class AdminController extends Controller
            'close_date' => $request->get('close_date'),
            'teacher_id' => $request->get('teacher'),
         ]);
+         $course->users()->sync($request->input('user',[]));
 
-        return redirect(route('teacher.admin.allCourse'))->with('success', 'Thành công!!');
+        return redirect(route('teacher.admin.allCourse'))->with('success', 'Success!!');
+
+//        echo "<pre>";
+//        print_r($request->input('user',[]));
+//        echo "</pre>";
+
+    }
+
+    public function deleteCourse($id)
+    {
+        $course = Course::findOrFail($id);
+        $course->delete();
+
+        return redirect(route('teacher.admin.allCourse'))->with('success', 'Success!!');
     }
 
     /**
@@ -78,6 +96,18 @@ class AdminController extends Controller
             ->paginate(5);
 
         return view('teacher::Admin.courses', compact('title', 'courses'));
+    }
+
+    public function editCourse($id)
+    {
+        $title = "Edit Course";
+        $course = Course::query()
+        ->select('courses.id','courses.name','courses.subject','courses.description','courses.status','courses.open_date','courses.close_date','teachers.name as teacher_name')
+        ->join('teachers', 'teachers.id', '=', 'courses.teacher_id')
+        ->where('courses.id', $id)->get();
+        $users = Course::findOrFail($id);
+
+        return view('teacher::Admin.editCourse', compact('title', 'course','users'));
     }
 
     /**
@@ -105,6 +135,16 @@ class AdminController extends Controller
         return view('teacher::Admin.users', compact('title', 'users'));
     }
 
+    public function passwordUser($id)
+    {
+        $user = User::findOrfail($id);
+        $user->update([
+            'password' => bcrypt(date('dmY', strtotime($user->date_of_birth))),
+        ]);
+
+        return redirect()->back()->with('success', 'Success!!');
+    }
+
     public function allTeacher(Request $request)
     {
         $title = "All Teacher";
@@ -128,10 +168,20 @@ class AdminController extends Controller
         return view('teacher::Admin.teachers', compact('title', 'teachers'));
     }
 
+    public function deleteTeacher($id)
+    {
+//        $teacher  = Teacher::findOrFail($id);
+//        $teacher->delete();
+
+        return redirect('teacher.admin.deleteTeacher')->with('success', 'Success!!');
+    }
+
     public function allNotification()
     {
         $title = "Notification";
-        $notis = Notification::where('teacher_id',Auth::guard('teacher')->user()->id)->paginate(5);
+        $notis = Notification::query()
+            ->join('teachers', 'teachers.id', '=', 'notifications.teacher_id')
+            ->paginate(5);
 
         return view('teacher::Admin.notifications', compact('title', 'notis'));
     }
@@ -178,7 +228,7 @@ class AdminController extends Controller
 
         ]);
 
-        return redirect(route('teacher.admin.allUser'))->with('success', 'Thành công!!');
+        return redirect(route('teacher.admin.allUser'))->with('success', 'Success!!');
     }
 
     public function deleteUser($id)
@@ -186,8 +236,58 @@ class AdminController extends Controller
         $user = User::FindOrFail($id);
         $user->delete();
 
-        return redirect(route('teacher.admin.allUser'))->with('success', 'Thành công!!');
+        return redirect(route('teacher.admin.allUser'))->with('success', 'Success!!');
+    }
 
+    public function createTeacher()
+    {
+        $title = "Create Teacher";
+        return view('teacher::Admin.createTeacher', compact('title'));
+    }
+
+    public function storeTeacher(TeacherRequest $request)
+    {
+//            echo "<pre>";
+//            print_r($request->all());
+//            echo "</pre>";
+        Teacher::query()->create([
+            'name' => $request->get('name'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'username' => $request->get('username'),
+            'email' => $request->get('email'),
+            'password' => bcrypt(date('dmY', strtotime($request->get('date_of_birth')))),
+            'phone_number' => $request->get('phone_number'),
+            'address' => $request->get('address'),
+            'role_id' => $request->get('role'),
+        ]);
+
+        return redirect(route('teacher.admin.allTeacher'))->with('success', 'Success!!');
+    }
+
+    public function createNotification()
+    {
+        $title = "Notification";
+        return view('teacher::Admin.createNotification', compact('title'));
+    }
+
+    public function storeNotification(Request $request)
+    {
+
+        $request->validate([
+            'content' => 'required',
+            'title' => 'required',
+        ]);
+//                echo "<pre>";
+//        print_r($request->all());
+//        echo "</pre>";
+        $teacher = Auth::guard('teacher')->user()->id;
+        Notification::create([
+            'teacher_id' =>  $teacher,
+            'content' =>  $request->get('content'),
+            'title' =>  $request->get('title'),
+        ]);
+
+        return redirect(route('teacher.admin.allNotification'))->with('success', 'Success!!');
     }
 }
 

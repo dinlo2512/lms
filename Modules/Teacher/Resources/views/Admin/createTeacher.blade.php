@@ -3,7 +3,7 @@
 @section('nav-list')
     <ul class="nav-list">
         <li>
-            <a href="" class="{{ request()->path() ? "actived" : "" }}">
+            <a href="{{ route('teacher.admin.allCourse') }}">
                 <i class="fas fa-th-large"></i>
                 <span class="links_name">Dashboard</span>
             </a>
@@ -16,7 +16,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('teacher.admin.allTeacher') }}">
+            <a href="{{ route('teacher.admin.allTeacher') }}" class="actived">
                 <i class="fas fa-graduation-cap"></i>
                 <span class="links_name">Teacher</span>
             </a>
@@ -41,13 +41,13 @@
 @section('content')
     <div class="content-top">
         <h3>Welcome </h3>
-        <p>User / Create User</p>
+        <p>Teacher / Create Teacher</p>
     </div>
     <div class="content">
         <div class="main">
-            <h1 class="h1">User Create</h1>
+            <h1 class="h1">Teacher Create</h1>
             <div class="form-group">
-                <form action="{{ route('teacher.admin.storeUser') }}" method="post">
+                <form action="{{ route('teacher.admin.storeTeacher') }}" method="post">
                     @csrf
                     <label for="name">
                         Name:
@@ -97,8 +97,26 @@
                     @enderror
                     <input type="text" class="form-control" name="address" value="{{ old('address') }}">
                     <br>
+                    <label for="">
+                        Role:
+                    </label>
+                    @error('role')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+                    <select name="role" id="role" class="form-control">
+                        <option value="">
+                            --Select Role--
+                        </option>
+                        <option value="1">
+                            Teacher
+                        </option>
+                        <option value="2">
+                            Admin
+                        </option>
+                    </select>
+                    <br>
                     <button class="btn btn-success" name="submit">Add</button>
-                    <a href="{{ route('teacher.admin.allUser') }}"> Back</a>
+                    <a href="{{ route('teacher.admin.allTeacher') }}"> Back</a>
                 </form>
             </div>
         </div>
@@ -109,4 +127,5 @@
         }
     </style>
 @endsection
+
 

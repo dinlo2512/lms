@@ -45,7 +45,9 @@ class UserCourseController extends Controller
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
         $exercises = Exercise::query()->where('course_id', $courseId)
-            ->where('lesson_id', $lessonId)->get();
+            ->where('lesson_id', $lessonId)
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('lesson', compact('title', 'lesson', 'course', 'exercises'));
     }
