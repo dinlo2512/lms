@@ -6,6 +6,7 @@ namespace Modules\Teacher\Http\Controllers;
 use App\Models\Announcement;
 use App\Models\Course;
 use App\Models\Notification;
+use App\Models\Subjects;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Teacher\Http\Requests\CoursesRequest;
+use Modules\Teacher\Http\Requests\SubjectRequest;
 use Modules\Teacher\Http\Requests\TeacherRequest;
 use Modules\Teacher\Http\Requests\UserRequest;
 
@@ -61,6 +63,7 @@ class AdminController extends Controller
            'name' => $request->get('name'),
            'subject' => $request->get('subject'),
            'description' => $request->get('description'),
+           'total' => $request->get('total'),
            'open_date' => $request->get('open_date'),
            'close_date' => $request->get('close_date'),
            'teacher_id' => $request->get('teacher'),
@@ -288,6 +291,85 @@ class AdminController extends Controller
         ]);
 
         return redirect(route('teacher.admin.allNotification'))->with('success', 'Success!!');
+    }
+
+    public function allSubject()
+    {
+        $title = 'All Subject';
+        $subjects = Subjects::paginate(8);
+
+        return view('teacher::Admin.subjects', compact('title', 'subjects'));
+    }
+
+    public function createSubject()
+    {
+        $title = 'Create Subject';
+
+        return view('teacher::Admin.createSubject', compact('title'));
+    }
+
+    public function storeSubject(SubjectRequest $request)
+    {
+        $file =$request->file('image');
+        if (isset($file)){
+            $name = time(). '.' . $file->getClientOriginalName();
+            Subjects::query()->create([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'image' => $name,
+            ]);
+
+            $file->storeAs('public/admin/avatar',$name);
+
+            return redirect(route('teacher.admin.allSubject'))
+                ->with('success','Success!!');
+        }else{
+            Subjects::query()->create([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+            ]);
+
+            return redirect(route('teacher.admin.allSubject'))
+                ->with('success','Success!!');
+        }
+    }
+
+    public function editSubject($id)
+    {
+        $title = 'Edit Subject';
+        $subject = Subjects::findOrFail($id);
+
+        return view('teacher::Admin.editSubject', compact('title', 'subject'));
+    }
+
+    public function updateSubject(SubjectRequest $request,$id)
+    {
+        $file =$request->file('image');
+        $subject = Subjects::findOrFail($id);
+        if (isset($file)){
+            $name = time(). '.' . $file->getClientOriginalName();
+            Subjects::query()->where('id',$id)->update([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'image' => $name,
+            ]);
+
+            $file->storeAs('public/admin/avatar',$name);
+            if(isset($subject->image)){
+                unlink(storage_path('app/public/admin/avatar/'.$subject->image));
+            }
+
+            return redirect(route('teacher.admin.allSubject'))
+                ->with('success','Success!!');
+        }else{
+            Subjects::query()->where('id',$id)->update([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+            ]);
+
+            return redirect(route('teacher.admin.allSubject'))
+                ->with('success','Success!!');
+        }
     }
 }
 

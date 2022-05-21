@@ -24,7 +24,7 @@ class SiteHomeController extends Controller
 //
 //        }
 
-        $notifications = Notification::orderByDesc('created_at')->get();
+        $notifications = Notification::orderByDesc('created_at')->paginate(5);
         return view('site-home',compact('title','notifications','courses'));
     }
 }

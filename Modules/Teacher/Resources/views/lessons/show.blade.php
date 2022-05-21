@@ -80,6 +80,7 @@
                     <input type="file" name="file" class="form-control">
                     <br>
                     <button class="btn btn-primary" name="submit" > Lưu</button>
+                    <a href="{{ route('teacher.lessons.index', $course->id) }}"> Trở về</a>
                 </form>
             </div>
         </div>

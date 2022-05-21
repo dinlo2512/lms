@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserSettingController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\SiteHomeController;
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,9 @@ use App\Http\Controllers\SiteHomeController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+Route::post('/contact', [ContactController::class, 'store'])
+->name('contact.store');
 
 Route::get('/site-home', [SiteHomeController::class, 'index'])
     ->name('sitehome');

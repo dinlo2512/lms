@@ -45,7 +45,7 @@
                     @if(isset(Auth::guard('teacher')->user()->avatar))
                     {{ asset('storage/admin/avatar/'.Auth::guard('teacher')->user()->avatar) }}
                     @else
-                    {{ URL('/front-end/images/user.jfif') }}
+                    {{ URL('/front-end/images/teacher.jpg') }}
                     @endif
                             " alt="">
                         <div class="name-job">

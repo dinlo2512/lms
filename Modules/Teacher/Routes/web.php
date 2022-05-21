@@ -54,7 +54,7 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('lessons.store');
     Route::get('courses/{courseId?}/lessons/{lessonId?}/edit', [LessonController::class, 'show'])
         ->name('lessons.show');
-    Route::post('courses/{courseId?}/lessons/{lessonId?}/update', [LessonController::class, 'update'])
+    Route::put('courses/{courseId?}/lessons/{lessonId?}/update', [LessonController::class, 'update'])
         ->name('lessons.update');
     Route::get('courses/{courseId?}/lessons/{lessonId?}/delete', [LessonController::class, 'destroy'])
         ->name('lessons.delete');
@@ -102,6 +102,8 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
 //Admin
     Route::get('/admin', [AdminController::class, 'index'])
         ->name('admin.index');
+    Route::get('/admin/allSubject',[AdminController::class, 'allSubject'])
+        ->name('admin.allSubject');
     Route::get('/admin/courses', [AdminController::class, 'allCourse'])
         ->name('admin.allCourse');
     Route::get('/admin/user', [AdminController::class, 'allUser'])
@@ -114,6 +116,16 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.roles');
     Route::post('/admin/roles', [AdminController::class, 'saveRole'])
         ->name('admin.saveRole');
+//Admin Subject
+    Route::get('/admin/subjects/create', [AdminController::class, 'createSubject'])
+        ->name('admin.createSubject');
+    Route::post('/admin/subjects/post', [AdminController::class, 'storeSubject'])
+        ->name('admin.storeSubject');
+    Route::get('/admin/subjects/edit/{id?}', [AdminController::class, 'editSubject'])
+        ->name('admin.editSubject');
+    Route::post('/admin/subjects/upadte/{id?}', [AdminController::class, 'updateSubject'])
+        ->name('admin.updateSubject');
+
 //Admin Course
     Route::get('/admin/courses/create', [AdminController::class, 'createCourse'])
         ->name('admin.createCourse');

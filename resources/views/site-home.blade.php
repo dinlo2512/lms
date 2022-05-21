@@ -19,13 +19,17 @@
             <h5 style="padding-left: 30px">&#9658; {{ $noti->content }}</h5>
             @endforeach
         </div>
+        <div>
+        {{ $notifications->links('paginate.my_paginate') }}
+        </div>
+        <br><br><br>
         <div style="margin-top:5px" class="text-lg-start card-body">
             <h3 class="text-info"> &rArr; Thông báo lớp:</h3>
             @foreach($courses as $course)
                 @php
                 $announcements = \App\Models\Announcement::query()->where('course_id',$course->course_id)
                 ->orderByDesc('created_at')
-                ->get();
+                ->paginate(3);
                 @endphp
             @foreach($announcements as $value)
                 <p>{{ $value->title }}</p>
@@ -33,7 +37,9 @@
             @endforeach
             @endforeach
         </div>
-
+        <div>
+            {{ $announcements->links('paginate.my_paginate') }}
+        </div>
     </div>
     <style>
         .fade-in{

@@ -37,16 +37,6 @@ class TeacherController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Show the specified resource.
      * @param int $id
      * @return Renderable
@@ -111,15 +101,10 @@ class TeacherController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param TeacherPasswordRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function updatePassword(TeacherPasswordRequest $request, $id)
     {
         $teacher = Teacher::findOrFail($id);

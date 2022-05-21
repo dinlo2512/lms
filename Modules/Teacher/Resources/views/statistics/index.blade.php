@@ -105,11 +105,18 @@
                 </table>
             </div>
             <br> <br>
-            <h1 class="h1">Thống kê số buổi đã học</h1>
+            <hr>
+            <h1 class="h1">Thống kê buổi học</h1>
             <div>
 
                 <h2> Lớp học bắt đầu từ: {{ date('d/m/Y',strtotime($course_date->open_date)) }}
                     - {{ date('d/m/Y',strtotime($course_date->close_date)) }}</h2>
+
+                <p class="text-info p-text">Số buổi đã học: {{ $all }} </p> -
+                <p class="text-info p-text"> Số buổi còn lại: {{ $course->total - $all }}/{{ $course->total }}</p>
+                <br>
+                <p class="text-info p-text">Số giờ đã học: {{ $all*3 }}(h) </p> -
+                <p class="text-info p-text"> Tổng số giờ: {{ $course->total*3 }}(h)</p>
                 <table>
                     <tr>
                         <td>
@@ -194,6 +201,7 @@
                 </ul>
             </div>
             <br><br>
+            <hr>
             <div class="form-group">
                 <form class="form-control form">
                     <h2> Danh sách thi học viên</h2>
@@ -418,6 +426,13 @@
             padding: 5px;
             background: #1abc9c;
             color: white !important
+        }
+
+        .p-text{
+            font-size: 20px;
+            display: inline;
+            padding: 20px 10px;
+
         }
     </style>
 

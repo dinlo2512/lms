@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL('front-end/css/style.css')}}">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <!--header section starts -->
@@ -218,25 +219,50 @@
 
         <div class="col-lg-5 col-md-8  mx-auto">
 
-            <form action="" data-aos="zoom-in">
-
+            @if($message = Session::get('success'))
+                <script>
+                    Swal.fire({
+                        title: '{{ $message }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    })
+                </script>
+            @endif
+            <form
+                action="{{ route('contact.store') }}"
+                  id="form-add" data-aos="zoom-in" method="post">
+                @csrf
                 <div class="inputBox">
-                    <input type="text" placeholder=" " required>
+                    @error('fullName')
+                    @foreach($errors->get('fullName') as $error)
+                        <p style="color:red; padding-left:28px">{{ $error }}</p>
+                    @endforeach
+                    @enderror
+                    <input type="text" placeholder=" " name="fullName" required id="fullName">
                     <h3>full name</h3>
                 </div>
 
                 <div class="inputBox">
-                    <input type="text" placeholder=" " required>
+                    @error('email')
+                    @foreach($errors->get('email') as $error)
+                        <p style="color:red; padding-left:28px">{{ $error }}</p>
+                    @endforeach
+                    @enderror
+                    <input type="email" placeholder=" " name="email" required id="email">
                     <h3>e-mail</h3>
                 </div>
-
+                @error('phone')
+                @foreach($errors->get('phone') as $error)
+                    <p style="color:red; padding-left:28px">{{ $error }}</p>
+                @endforeach
+                @enderror
                 <div class="inputBox">
-                    <input type="text" placeholder=" " required>
+                    <input type="text" placeholder=" " name="phone" id="phone" required>
                     <h3>phone</h3>
                 </div>
 
                 <div class="inputBox">
-                    <textarea name="" id="" cols="30" rows="10" placeholder=" " required></textarea>
+                    <textarea id="" cols="30" rows="10" placeholder=" " name="message" id="message"></textarea>
                     <h3>message</h3>
                 </div>
 
@@ -311,6 +337,31 @@
 <script>
     AOS.init();
 </script>
+{{--<script type="text/javascript">--}}
+{{--    $(document).ready(function(){--}}
+
+{{--        $('#form-add').submit(function(e){--}}
+{{--            e.preventDefault();--}}
+
+{{--            $.ajax({--}}
+{{--                headers: {{ csrf_token() }},--}}
+{{--                url: {{ route('contact.store') }},--}}
+{{--                method: 'get',--}}
+{{--                data:{--}}
+{{--                    fullname: $('#fullName').val(),--}}
+{{--                    email: $('#email').val(),--}}
+{{--                    phone: $('#phone').val(),--}}
+{{--                    message: $('#message').val(),--}}
+{{--                },--}}
+{{--                success: function(response) {--}}
+{{--                  console.log(response);--}}
+{{--                },error: function (err){--}}
+{{--                    console.log(err);--}}
+{{--                }--}}
+{{--            })--}}
+{{--        })--}}
+{{--    })--}}
+{{--</script>--}}
 <!--script ends-->
 </body>
 </html>

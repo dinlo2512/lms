@@ -18,6 +18,7 @@ class Course extends Model
         'teacher_id',
         'subject',
         'status',
+        'total',
         'open_date',
         'close_date'
     ];

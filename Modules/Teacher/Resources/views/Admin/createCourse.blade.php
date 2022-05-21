@@ -73,6 +73,14 @@
                 @enderror
                 <textarea name="description" type="text" class="form-control" rows="10">{{ old('description') }}</textarea>
                 <br>
+                @error('total')
+                <p class="error">{{ $message }}</p>
+                @enderror
+                <label for="total">
+                    Total:
+                </label>
+                <input type="number" name="total" class="form-control" value="{{ old('total') }}">
+                <br>
                 <label for="open_date">
                     Open Date:
                 </label>

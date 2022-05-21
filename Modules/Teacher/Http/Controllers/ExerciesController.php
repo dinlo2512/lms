@@ -105,15 +105,11 @@ class ExerciesController extends Controller
      */
     public function update(UpdateExerciseRequest $request, int $courseId, int $lessonId, int $exerciseId)
     {
-//        echo "<pre>";
-//        print_r($_POST);
-//        echo "</pre>";
-
         $course = Course::findOrFail($courseId);
         $lesson = Lesson::findOrFail($lessonId);
         $exercises = Exercise::findOrFail($exerciseId);
 
-        Exercise::query()->where('id',$exercises->id )->update([
+        $update = Exercise::query()->where('id',$exercises->id )->update([
             'content' => $request->get('content'),
             'deadline' => $request->get('deadline'),
             'course_id' => $course->id,

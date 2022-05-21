@@ -5,7 +5,7 @@ namespace Modules\Teacher\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CoursesRequest extends FormRequest
+class SubjectRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,22 +15,19 @@ class CoursesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min: 5',
-            'subject' => 'required| min:3',
+            'image' => 'image',
+            'name' => 'required',
             'description' => 'required',
-            'open_date' => 'required|before:close_date',
-            'close_date'=> 'required',
-            'teacher' => 'required',
-            'user' => 'required',
-            'total' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'teacher.required' => 'Must pick one Teacher',
-            'user.required' => 'Add at least one student',
+            'name.required' => '* Tên không được để trống',
+            'description.required' => '* Mô tả không được để trống',
+            'image.image' => '* Ảnh không đúng định dạng',
+
         ];
     }
 

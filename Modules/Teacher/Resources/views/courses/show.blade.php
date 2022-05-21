@@ -43,6 +43,13 @@
             </a>
 
         </li>
+        <li>
+            <a href="https://lms-videocall.glitch.me/">
+                <i class="fas fa-video"></i>
+                <span class="links_name">Meeting</span>
+            </a>
+
+        </li>
     </ul>
 @endsection
 
@@ -60,9 +67,13 @@
                     <hr>
                     <div>
                         @if($message = Session::get('success'))
-                            <div class="alert-success">
-                                {{ $message }}
-                            </div>
+                            <script>
+                                Swal.fire({
+                                    title: '{{ $message }}',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                })
+                            </script>
                         @endif
                         @if($get > 0)
                         <form action="{{ route('teacher.course.attendance.update', $course->id) }}" method="POST">
