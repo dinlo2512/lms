@@ -10,6 +10,13 @@
 
         </li>
         <li>
+            <a href="{{ route('teacher.admin.allSubject') }}">
+                <i class="fas fa-chalkboard"></i>
+                <span class="links_name">Subject</span>
+            </a>
+
+        </li>
+        <li>
             <a href="{{ route('teacher.admin.allUser') }}">
                 <i class="fas fa-user"></i>
                 <span class="links_name">User</span>

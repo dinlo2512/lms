@@ -46,9 +46,10 @@ class AdminController extends Controller
     {
         $title = "Create Course";
         $teachers = Teacher::where('role_id', 1)->get();
+        $subjects = Subjects::all();
         $users = User::all();
 
-        return view('teacher::Admin.createCourse', compact('title', 'teachers','users'));
+        return view('teacher::Admin.createCourse', compact('title', 'teachers','users', 'subjects'));
     }
 
 
@@ -71,10 +72,6 @@ class AdminController extends Controller
          $course->users()->sync($request->input('user',[]));
 
         return redirect(route('teacher.admin.allCourse'))->with('success', 'Success!!');
-
-//        echo "<pre>";
-//        print_r($request->input('user',[]));
-//        echo "</pre>";
 
     }
 
@@ -112,6 +109,8 @@ class AdminController extends Controller
 
         return view('teacher::Admin.editCourse', compact('title', 'course','users'));
     }
+
+
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
@@ -163,6 +162,7 @@ class AdminController extends Controller
         elseif (request()->get('select') == 0){
             $name = request()->get('name');
             $teachers = Teacher::where('name', 'LIKE','%'.$name.'%')->paginate(8);
+
         }
         else{
             $teachers = Teacher::paginate(8);
@@ -342,6 +342,14 @@ class AdminController extends Controller
         return view('teacher::Admin.editSubject', compact('title', 'subject'));
     }
 
+    public function showSubject($id)
+    {
+        $subject = Subjects::findOrFail($id);
+
+        return response()->json([
+            'data' => $subject,
+        ], 200);
+    }
     public function updateSubject(SubjectRequest $request,$id)
     {
         $file =$request->file('image');

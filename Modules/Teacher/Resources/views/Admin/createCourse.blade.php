@@ -63,7 +63,14 @@
                 @error('subject')
                 <p class="error">{{ $message }}</p>
                 @enderror
-                <input type="text" class="form-control" name="subject" value="{{ old('subject') }}">
+                <select name="subject" id="subject" class="form-control">
+                    <option value="">Select Subject</option>
+                    @foreach($subjects as $subject)
+                        <option value="{{ $subject->name }}">
+                            {{ $subject->name }}
+                        </option>
+                    @endforeach
+                </select>
                 <br>
                 <label for="description">
                     Description:

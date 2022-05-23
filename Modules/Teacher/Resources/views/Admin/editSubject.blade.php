@@ -78,7 +78,11 @@
                 <label for="image">
                     Image
                 </label>
-                <p>{{ $subject->image }}</p>
+                <p>
+                    @if(isset($subject->image))
+                    <img class="subject" src="{{ asset('storage/admin/avatar/'.$subject->image) }}" alt="ảnh">
+                    @endif
+                </p>
                 <input type="file" class="form-control" name="image">
                 <br>
                 <button class="btn btn-success" name="submit">Add</button>
@@ -91,6 +95,12 @@
     .form-group{
         margin:10px
     }
+     .subject{
+         width: 80px;
+         height: 50px;
+
+     }
+
 </style>
 @endsection
 

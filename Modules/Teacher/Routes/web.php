@@ -123,6 +123,8 @@ Route::prefix('teacher')->as('teacher.')->group(function() {
         ->name('admin.storeSubject');
     Route::get('/admin/subjects/edit/{id?}', [AdminController::class, 'editSubject'])
         ->name('admin.editSubject');
+    Route::get('/admin/subjects/show/{id?}', [AdminController::class, 'showSubject'])
+        ->name('admin.showSubject');
     Route::post('/admin/subjects/upadte/{id?}', [AdminController::class, 'updateSubject'])
         ->name('admin.updateSubject');
 

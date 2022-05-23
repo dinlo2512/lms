@@ -76,21 +76,83 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Image</th>
                             <th>Created At</th>
                             <th>Update At</th>
-                            <th colspan="2">Action</th>
+                            <th colspan="3" style="width: 20%">Action</th>
                         </tr>
                         @foreach($subjects as $subject)
                             <tr>
                                 <td>{{ $subject->id }}</td>
                                 <td>{{ $subject->name }}</td>
-                                <td>{{ $subject->description }}</td>
-                                <td>{{ $subject->image }}</td>
+                                <td>
+                                    @if(isset($subject->image))
+                                        <img class="subject" src="{{ asset('storage/admin/avatar/'.$subject->image) }}"
+                                             alt="ảnh">
+                                    @endif
+                                </td>
                                 <td>{{ date('d/m/Y', strtotime($subject->created_at)) }}</td>
                                 <td>{{ date('d/m/Y', strtotime($subject->updated_at)) }}</td>
-                                <td><a href="{{ route('teacher.admin.editSubject', $subject->id) }}" class="btn btn-warning">
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button"
+                                            data-url="{{ route('teacher.admin.showSubject', $subject->id) }}"
+                                            class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+                                        Xem
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Subject Detail</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <label for="name">
+                                                        Name:
+                                                    </label>
+                                                    <h4 id="name">
+
+                                                    </h4>
+                                                    <br>
+                                                    <label for="description">
+                                                        Description
+                                                    </label>
+                                                    <h4 id="description">
+
+                                                    </h4>
+                                                    <br>
+                                                    <label for="created_at">
+                                                        Created At
+                                                    </label>
+                                                    <h4 id="created_at">
+
+                                                    </h4>
+                                                    <br>
+                                                    <label for="updated_at">
+                                                       Updated at
+                                                    </label>
+                                                    <h4 id="updated_at">
+
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><a href="{{ route('teacher.admin.editSubject', $subject->id) }}"
+                                       class="btn btn-warning">
                                         Sửa</a></td>
                                 <td>
                                     <a href="" class="btn btn-danger delete">Xóa</a>
@@ -102,4 +164,37 @@
             </div>
         </div>
     </div>
+    <style>
+        .subject {
+            width: 80px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        #subject {
+            width: 80px;
+            height: 50px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.btn-info').click(function () {
+                var url = $(this).attr('data-url');
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    success: function (response) {
+                        $('h4#name').text(response.data.name)
+                        $('h4#description').text(response.data.description)
+                        $('h4#updated_at').text(response.data.updated_at)
+                        $('h4#created_at').text(response.data.created_at)
+                    },
+                    error: function (jqXHR, textStatus, errorThrown){
+
+                    }
+                })
+            })
+        })
+    </script>
 @endsection
